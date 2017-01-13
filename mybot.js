@@ -66,9 +66,7 @@ bot.on("message", message => {
         message.channel.sendMessage("pong");
     }
 
-  if (command === "pong") {
-        message.channel.sendMessage("ping");
-    }
+  
 
     if (command === "bot") {
         message.reply("\n \nCommands: \n \n`/say [message]` - Speak on behalf of Markos. \n \n`!cookie` - What could happen? \n" + 
