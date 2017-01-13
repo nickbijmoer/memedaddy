@@ -66,6 +66,10 @@ bot.on("message", message => {
         message.channel.sendMessage("pong");
     }
 
+  if (command === "pong") {
+        message.channel.sendMessage("ping");
+    }
+
     if (command === "bot") {
         message.reply("\n \nCommands: \n \n`/say [message]` - Speak on behalf of Markos. \n \n`!cookie` - What could happen? \n" + 
         	"\n`!table` - Warning, only use when you're angry. \n \n`!ping` - Pong! \n \n`.lul` - LUL \n");
@@ -80,7 +84,7 @@ bot.on("message", message => {
 });
 
 bot.on('ready', () => {
-  console.log("Let's Go!");
+  console.log("woo!");
 });
 
 bot.login(config.token);
