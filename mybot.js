@@ -22,13 +22,13 @@ bot.on("message", message => {
 
 
   else if (message.content.toLowerCase().includes("markos")) {
-    if (message.content.toLowerCase().includes(posGreet)) {
+    if (posGreet.includes(message.content.toLowerCase())) {
       message.reply(GREETINGS[Math.floor(Math.random() * GREETINGS.length)]);
-    } else if (message.content.toLowerCase().includes(posThanks)) {
+    } else if (posThanks.includes(message.content.toLowerCase())) {
       message.reply(THANKS[Math.floor(Math.random() * THANKS.length)]);
-    } else if (message.content.toLowerCase().includes(posBye)) {
+    } else if (posBye.includes(message.content.toLowerCase())) {
       message.reply(BYE[Math.floor(Math.random() * BYE.length)]);
-    } else if (message.content.toLowerCase().includes(posInsults)) {
+    } else if (posInsults.includes(message.content.toLowerCase())) {
       message.reply(INSULTS[Math.floor(Math.random() * INSULTS.length)]);
     } else { 
       message.reply(MENTION[Math.floor(Math.random() * MENTION.length)]);
