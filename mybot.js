@@ -56,63 +56,30 @@ bot.on("message", message => {
     message.channel.sendMessage("pong");
   }
 
-  if (command === "hug") {
-    if (message.author.id == '172571295077105664') return;
-    if (message.author.id == '142076624072867840') return;
-    if (message.author.id == '145456746721312768') return;
-    if (message.author.id == '125300331419533312') return;
-    if (message.author.id == '187938633989226497') return;
-    if (message.author.id == '114094000100737024') return;
-    if (message.author.id == '219101103894167552') return;
-    if (message.author.id == '190173742926790656') return;
-    if (message.author.id == '155417194530996225') return;
-    message.reply("I only hug people I like.");
-  }
+  if (command === "hug") {    
+    if (message.author.id === '172571295077105664') { //Melmsie
+        message.reply("Fick dich! Sie werden nie eine Umarmung haben!");
+    } else if (message.author.id === '142076624072867840') { //Iwan
+        message.reply("You get a hug for now. I might change my mind though.");
+    } else if (message.author.id === '145456746721312768')  { //Samoxive
+        message.reply("You get eine hug");
+    } else if (message.author.id === '125300331419533312')  { //firearrow
+        message.reply("You get 2 hug");
+    } else if (message.author.id === '145456746721312768')  { //tc
+        message.reply("Your picture scares me. No hug.");
+    } else if (message.author.id === '145456746721312768')  { //Heasummn
+        message.reply("You say 'Screw you markos', no hug for you ever Hündin.");
+    } else if (message.author.id === '145456746721312768')  { //tuxy
+        message.reply("You taught me how to hug. You get fünf");
+    } else if (message.author.id === '145456746721312768')  { //Takosara
+        message.reply("You get eine hug for now, und you get eine hug after you play overwatch with my bitch, Melmsie.");
+    } else if (message.author.id === '145456746721312768')  { //tbodt
+        message.reply("You make me say lul too much, no hug for you.");
+    } else {
+        message.reply("I only hug people I like.");
+    }
+}
 
-  if (command === "hug") { //Melmsie
-    if (message.author.id !== '172571295077105664') return;
-    message.reply("Fick dich! Sie werden nie eine Umarmung haben!");
-  }
-
-  if (command === "hug") { //Iwan
-    if (message.author.id !== '142076624072867840') return;
-    message.reply("You get a hug for now. I might change my mind though.");
-  }
-
-  if (command === "hug") { //Samoxive
-    if (message.author.id !== '145456746721312768') return;
-    message.reply("You get eine hug");
-  }
-
-  if (command === "hug") { //firearrow
-    if (message.author.id !== '125300331419533312') return;
-    message.reply("You get 2 hug");
-  }
-
-  if (command === "hug") { //tc
-    if (message.author.id !== '187938633989226497') return;
-    message.reply("Your picture scares me. No hug.");
-  }
-
-  if (command === "hug") { //Heasummn
-    if (message.author.id !== '114094000100737024') return;
-    message.reply("You say 'Screw you markos', no hug for you ever Hündin. ");
-  }
-
-  if (command === "hug") { //tuxy
-    if (message.author.id !== '219101103894167552') return;
-    message.reply("Fick dich!");
-  }
-
-  if (command === "hug") { //Takosara
-    if (message.author.id !== '190173742926790656') return;
-    message.reply("You play genji. I will think about hugging you.");
-  }
-
-  if (command === "hug") { //tbodt
-    if (message.author.id !== '155417194530996225') return;
-    message.reply("You make me say lul too much, no hug for you.");
-  }
 
   if (command === "help") {
     message.reply("\n \nCommands: \n \n`/say [message]` - Speak on behalf of Markos. [Owner Only] \n \n`!cookie` - What could happen? \n" + 
