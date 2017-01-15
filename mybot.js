@@ -57,6 +57,15 @@ bot.on("message", message => {
   }
 
   if (command === "hug") {
+    if (message.author.id == '172571295077105664') return;
+    if (message.author.id == '142076624072867840') return;
+    if (message.author.id == '145456746721312768') return;
+    if (message.author.id == '125300331419533312') return;
+    if (message.author.id == '187938633989226497') return;
+    if (message.author.id == '114094000100737024') return;
+    if (message.author.id == '219101103894167552') return;
+    if (message.author.id == '190173742926790656') return;
+    if (message.author.id == '155417194530996225') return;
     message.reply("I only hug people I like.");
   }
 
