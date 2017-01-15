@@ -14,6 +14,14 @@ let BYE = ["THANK THE LORD! THEY ARE GONE", "I hate to see you go, but I love to
 let MENTION = ["Please go order me a pizza.", "My dog is plotting to shit in your shoe, and I encourage it.", "Have you ever felt the love of a women?", "What is love? Baby don't hurt me no more!", "How much is 20lbs of weed worth in your neck of the woods? Asking for a friend", "Dear lord, you need a life", "I'm not real *cries*", "Brah, Sprichst du überhaupt Deutsch?", "Can't talk. Currently eating pussy... The cat you sick bastard", "My favorite movie is Cane Toads. Its about Toads in Austrailia who were brought in to eat the bugs that had infested their sugar cane. However, it didn't eat those bugs and instead ate every other bug in sight! They have no natural predators in that area so they grew rapidly, destroying the ecosystem. They are so poisonous that you can kill them and smoke them, and you'll get higher than weed could ever take you. Some people are in love with the cane toads and keep them as pets, while others despise them and go out of their way to run them over with their cars. There is also strange sexual music during the time where we learn about reproduction. Then an old man comes on screen and shows us the sound a cane toad makes while *finishing.* If the cane toad feels threatened or is squeezed too hard, it will shoot out a poisonous liquid that comes out like a popped pimple. Again, this movie is Cane Toads. I am Markos the Bot, amature movie reviewist/scientist and I give this 2 big thumbs up the butt. ", "hold on... going through tunnel... losing you", "no.", "Du bist mien Perle", "Willst du mich heiraten?", "Go check out my new podcast", "dkfdkdfx dfxk dfxddxdxds mds kmdxfm dsxmdszxk dk yousuck dxfckdszm vcxkldxsfm" ];
 let INSULTS = ["Fuck diese Scheiße.", "Excuse me. This is a safe, clean environment. Do not use that language.", "why don’t you just kiss my ass?", "Do not take that tone with me.", "Strong words from such a ridiculously named person", "Be mature, asshole", "Language like that turns me on so hard", "Fuck off", "go fuck yourself, k?", "k", "Heben Sie sogar?", "I don't care what you think of me.", "Sticks and stones may break my bones, but your words suck dick.", "Hey, that's what your mom said!", "Deine Oma masturbiert im stehen!", "Deine Mutter geht in der Stadt huren", "Du bist besonders... nur wie jeder sonst", "Küss meinen Arsch", "Leck mich", "Verpiss dich!", "Sohn einer Hündin!", "Shizcoff", "Du bist ein großes Arschloch"]
 
+function isArrayInString(str, list) {
+    for (let word in list) {
+        if (str.includes(word)) return true;
+    }
+    
+    return false;
+}
+
 bot.on("message", message => {
 	console.log(message.content)
 
@@ -22,13 +30,13 @@ bot.on("message", message => {
 
 
   else if (message.content.toLowerCase().includes("markos")) {
-    if (posGreet.includes(message.content.toLowerCase())) {
+    if (isArrayInString(message.content.toLowerCase(), posGreet)) {
       message.reply(GREETINGS[Math.floor(Math.random() * GREETINGS.length)]);
-    } else if (posThanks.includes(message.content.toLowerCase())) {
+    } else if (isArrayInString(message.content.toLowerCase(), posThanks)) {
       message.reply(THANKS[Math.floor(Math.random() * THANKS.length)]);
-    } else if (posBye.includes(message.content.toLowerCase())) {
+    } else if (isArrayInString(message.content.toLowerCase(), posBye)) {
       message.reply(BYE[Math.floor(Math.random() * BYE.length)]);
-    } else if (posInsults.includes(message.content.toLowerCase())) {
+    } else if (isArrayInString(message.content.toLowerCase(), posInsults)) {
       message.reply(INSULTS[Math.floor(Math.random() * INSULTS.length)]);
     } else { 
       message.reply(MENTION[Math.floor(Math.random() * MENTION.length)]);
