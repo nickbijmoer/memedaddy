@@ -22,19 +22,15 @@ bot.on("message", message => {
 
   else if (message.content.toLowerCase().includes("markos")) {
     if (message.content.toLowerCase().includes(posGreet)) {
-      message.channel.reply(GREETINGS[Math.floor(Math.random() * GREETINGS.length)]);
+      message.reply(GREETINGS[Math.floor(Math.random() * GREETINGS.length)]);
     } else if (message.content.toLowerCase().includes(posThanks)) {
-      message.channel.reply(THANKS[Math.floor(Math.random() * THANKS.length)]);
+      message.reply(THANKS[Math.floor(Math.random() * THANKS.length)]);
     } else if (message.content.toLowerCase().includes(posBye)) {
-      message.channel.reply(GREETINGS[Math.floor(Math.random() * BYE.length)]);
+      message.reply(GREETINGS[Math.floor(Math.random() * BYE.length)]);
     } else { 
-      message.channel.reply(GREETINGS[Math.floor(Math.random() * MENTION.length)]);
+      message.reply(GREETINGS[Math.floor(Math.random() * MENTION.length)]);
     }
   }
-
-	
-
-	
 
   else if (message.content.toLowerCase().startsWith("wtf markos")) {
     //if (message.author.id !== '172571295077105664') return;
