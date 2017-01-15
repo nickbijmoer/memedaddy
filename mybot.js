@@ -65,15 +65,15 @@ bot.on("message", message => {
         message.reply("You get eine hug");
     } else if (message.author.id === '125300331419533312')  { //firearrow
         message.reply("You get 2 hug");
-    } else if (message.author.id === '145456746721312768')  { //tc
+    } else if (message.author.id === '187938633989226497')  { //tc
         message.reply("Your picture scares me. No hug.");
-    } else if (message.author.id === '145456746721312768')  { //Heasummn
+    } else if (message.author.id === '114094000100737024')  { //Heasummn
         message.reply("You say 'Screw you markos', no hug for you ever Hündin.");
-    } else if (message.author.id === '145456746721312768')  { //tuxy
+    } else if (message.author.id === '219101103894167552')  { //tuxy
         message.reply("You taught me how to hug. You get fünf");
-    } else if (message.author.id === '145456746721312768')  { //Takosara
+    } else if (message.author.id === '190173742926790656')  { //Takosara
         message.reply("You get eine hug for now, und you get eine hug after you play overwatch with my bitch, Melmsie.");
-    } else if (message.author.id === '145456746721312768')  { //tbodt
+    } else if (message.author.id === '155417194530996225')  { //tbodt
         message.reply("You make me say lul too much, no hug for you.");
     } else {
         message.reply("I only hug people I like.");
