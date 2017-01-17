@@ -2,6 +2,10 @@ var Discord = require("discord.js");
 var bot = new Discord.Client();
 const config = require("./config.json")
 let prefix = config.prefix
+let request = require('request');
+
+
+
 
 let posGreet = ["hi", "hello", "hey", "yo", "greetings", "hallo", "Grüße"]
 let posBye = ["bye", "goodbye", "later", "peace", "cya", "see you later", "tschüss", "auf wiedersehen", "bis später"]
@@ -18,6 +22,9 @@ let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDy
 let coin = ["Heads", "Tails"]
 let ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
+
+
+
 function isArrayInString(str, list) {
     for (let i = 0; i < list.length; i++) {
         if (str.includes(list[i])) return true;
@@ -25,6 +32,8 @@ function isArrayInString(str, list) {
     
     return false;
 }
+
+
 
 bot.on("message", message => {
 	console.log(message.content)
@@ -51,7 +60,6 @@ bot.on("message", message => {
     message.channel.sendMessage('http://files.gamebanana.com/img/ico/sprays/57822c19e1ad1.png');
   }
 
-
     
 	let command = message.content.split(" ")[0];
 	command = command.slice(prefix.length);
@@ -62,9 +70,54 @@ bot.on("message", message => {
 		message.channel.sendMessage("No cookies from me.");
 	}
 
+  
+    request({url:'https://api.github.com/repos/Melmsie/Markos/commits', headers:{'User-Agent':'melmsie'}}, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      jsonBody = JSON.parse(body)
+      var rece
+  
+
+
+
+
   if (command === "info") {
-    message.channel.sendMessage("```\n Markos \n \nThe sassy Germanic American Discord bot \n \nCurrent Version: Beta```");
+    message.channel.sendMessage("", {embed: {
+    color: 3447003,
+    author: {
+      name: `Markos`,
+      icon_url: bot.user.avatarURL
+    },
+    title: '',
+    //url: 'http://google.com',
+    description: 'Markos is a sassy yet lovable bot, created by [Melmsie](https://github.com/melmsie).',
+    fields: [
+      {
+        name: 'Version',
+        value: '1.0'
+      },
+      {
+        name: 'Most Recent Commit',
+        value: jsonBody[0].commit.message
+      },
+      {
+        name: 'Commands',
+        value: 'To see the current commands for Markos, do !help'
+      },
+      {
+        name: 'Requests',
+        value: 'Have a request for a command? Feel free to PM Melmsie!'
+      }
+    ],
+    timestamp: new Date(),
+    //footer: {
+      //icon_url: bot.user.avatarURL,
+      //text: '© Example'
+  //}
+}});
   }
+
+    }
+  })
 
   if (command === "coin") {
     message.channel.sendMessage(coin[Math.floor(Math.random() * coin.length)]);
@@ -92,7 +145,7 @@ bot.on("message", message => {
 
   if (command === "hug") {    
     if (message.author.id === '172571295077105664') { //Melmsie
-        message.reply("Fick dich! Sie werden nie eine Umarmung haben!");
+        message.reply("No hugs, I still hate you for creating me in this nasty world.");
     } else if (message.author.id === '142076624072867840') { //Iwan
         message.reply("NO");
     } else if (message.author.id === '145456746721312768')  { //Samoxive
@@ -121,12 +174,13 @@ bot.on("message", message => {
   }
 
 
-  if (command === "help") {
-    message.reply("\n \nCommands: \n \n`/say [message]` - Speak on behalf of Markos. [Owner Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + 
+   if (command === "help") {
+    message.channel.sendMessage("Sliding into your DM's...");
+    message.author.sendMessage("\n \nCommands: \n \n!info - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Owner Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + 
       "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + 
       "\n`!transate` - Coming Soon! \n \n`!update` - Coming Soon! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" +
       "\n`!story` - Coming Soon!");
-    message.delete()     	
+       	
   }
 
   if (message.content.startsWith("/say")) {
