@@ -109,10 +109,7 @@ bot.on("message", message => {
       }
     ],
     timestamp: new Date(),
-    //footer: {
-      //icon_url: bot.user.avatarURL,
-      //text: '© Example'
-  //}
+    
 }});
   }
 

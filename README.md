@@ -12,8 +12,6 @@ The words in his vocabulary grow as you interact with him [and as fast as we can
 
 Commands in Progress: 
 
-!update - Pulls the latest commit message from Markos so that users can see what's new.
-
 !translate [message] - translates whatever the message is into English. *this is helpful if you want to talk to Markos, but don't know German*
 
 !story - Markos will tell a story. If you're lucky, it'll be about his childhood!
