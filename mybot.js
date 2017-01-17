@@ -82,7 +82,7 @@ bot.on("message", message => {
       icon_url: bot.user.avatarURL
     },
     title: '',
-    /'/url: 'http://google.com','
+    
     description: 'Markos is a sassy yet lovable bot, created by [Melmsie](https://github.com/melmsie).',
     fields: [
       {
@@ -95,7 +95,7 @@ bot.on("message", message => {
       },
       {
         name: 'Commands',
-        value: 'To see the current commands for Markos, do !help or visit [markos.melmsie.com](markos.melmsie.com)'
+        value: 'To see the current commands for Markos, do !help or visit ~[markos.melmsie.com](markos.melmsie.com)~'
       },
       {
         name: 'Requests',
