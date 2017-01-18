@@ -1,0 +1,25 @@
+{
+  "name": "Markos",
+  "version": "1.0.0",
+  "description": "A sassy German/American bot, made for discord. He hates his owner, Melmsie.",
+  "main": "mybot.js",
+  "dependencies": {
+    "cleverbot": "^1.0.4",
+    "discord.js": "^11.0.0",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "return 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melmsie/Markos.git"
+  },
+  "author": "Melmsie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melmsie/Markos/issues"
+  },
+  "homepage": "https://github.com/melmsie/Markos#readme"
+}
