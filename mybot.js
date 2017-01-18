@@ -7,6 +7,7 @@ cbot.setNick("Markos");
 const stories = require("./stories.json")
 let prefix = config.prefix
 let request = require('request');
+const translate_message = require('./translate.js');
 
 let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"]
 let coin = ["Heads", "Tails"]
@@ -153,6 +154,8 @@ bot.on("message", message => {
     message.channel.sendMessage(args.join(" "));
     message.delete()
   }
+
+  if (command === 'translate') translate_message(message);
 
 });
 
