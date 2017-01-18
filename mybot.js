@@ -1,18 +1,18 @@
 var Discord = require("discord.js");
 var bot = new Discord.Client();
-const config = require("./config.json")
-var cleverbot = require("cleverbot.io"),
-  clever = new cleverbot(config.clever, config.key);
+const config = require("./config.json");
+var cleverbot = require("cleverbot.io");
+clever = new cleverbot(config.clever, config.key);
 clever.setNick("Markos");
-const stories = require("./stories.json")
+const stories = require("./stories.json");
 let prefix = config.prefix
 let request = require('request');
 let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"]
-let coin = ["Heads", "Tails"]
+let coin = ["Heads", "Tails"];
 let ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 let story = [stories.birth, stories.abusive, stories.confused, stories.birdbees, stories.mom, stories.no, stories.lion, stories.boy];
 bot.on("message", message => {
-  console.log(message.content)
+  console.log(message.content);
     //anti-bot line
   if (message.author.bot) return;
   clever.create(function(err, session) {
