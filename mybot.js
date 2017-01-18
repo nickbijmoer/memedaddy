@@ -1,6 +1,9 @@
 var Discord = require("discord.js");
 var bot = new Discord.Client();
 const config = require("./config.json")
+var cleverbot = require("cleverbot.io"),
+const clever = new cleverbot(config.clever, config.key);
+cbot.setNick("Markos");
 const stories = require("./stories.json")
 let prefix = config.prefix
 let request = require('request');
@@ -14,8 +17,17 @@ let story = [stories.birth, stories.abusive, stories.confused, stories.birdbees,
 bot.on("message", message => {
 	console.log(message.content)
 
-//anti-bot line
+ //anti-bot line
 	if(message.author.bot) return;
+
+
+  clever.create(function (err, session) {
+    if (message.content.startsWith("<@270904126974590976>")) {
+      clever.ask(message.content, function (err, response) {
+        message.reply(response); 
+      });
+    }
+  });
 
     
 	let command = message.content.split(" ")[0];
@@ -28,49 +40,45 @@ bot.on("message", message => {
 	}
 
   
-request({url:'https://api.github.com/repos/Melmsie/Markos/commits', headers:{'User-Agent':'melmsie'}}, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    jsonBody = JSON.parse(body)
+  request({url:'https://api.github.com/repos/Melmsie/Markos/commits', headers:{'User-Agent':'melmsie'}}, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      jsonBody = JSON.parse(body)
 
-  if (command === "info") {
-    message.channel.sendMessage("", {embed: {
-    color: 3447003,
-    author: {
-      name: `Markos`,
-      icon_url: bot.user.avatarURL
-    },
-    title: '',
-    
-    description: 'Markos is a sassy yet lovable bot, created by [Melmsie](https://github.com/melmsie).',
-    fields: [
-      {
-        name: 'Commands',
-        value: 'To see the current commands for Markos, do !help'
+    if (command === "info") {
+      message.channel.sendMessage("", {embed: {
+      color: 3447003,
+      author: {
+        name: `Markos`,
+        icon_url: bot.user.avatarURL
       },
-      {
-        name: 'Version',
-        value: '1.1.2'
-      },
-      {
-        name: 'Most Recent Commit',
-        value: jsonBody[0].commit.message
-      },
-      {
-        name: 'Lines of Code',
-        value: '151'
-      },
-      {
-        name: 'Requests',
-        value: 'Have a request for a command? Feel free to PM Melmsie!'
-      }
-    ],
-    timestamp: new Date(),
-    
-      }});
+      title: '',
+      
+      description: 'V1.1.3',
+      fields: [
+        {
+          name: 'Commands',
+          value: 'To see the current commands for Markos, do !help'
+        },
+        {
+          name: 'Most Recent Commit',
+          value: jsonBody[0].commit.message
+        },
+        {
+          name: 'Lines of Code',
+          value: '170'
+        },
+        {
+          name: 'Requests',
+          value: 'Have a request for a command? Feel free to PM Melmsie, or submit a pull request for Markos [here](https://github.com/melmsie/Markos).'
         }
+      ],
+      timestamp: new Date(),
+      
+        }});
+          }
 
-    }
-  })
+      }
+    })
 
   if (command === "story") {
     message.channel.sendMessage(story[Math.floor(Math.random() * story.length)]);
@@ -149,7 +157,7 @@ request({url:'https://api.github.com/repos/Melmsie/Markos/commits', headers:{'Us
 });
 
 bot.on('ready', () => {
-  console.log("Markos v1.1.2 loaded successfully.");
+  console.log("Markos v1.1.3 loaded successfully.");
   console.log("Hello, Austin.");
 });
 
