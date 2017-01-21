@@ -45,7 +45,7 @@ bot.on("message", message => {
               icon_url: bot.user.avatarURL
             },
             title: '',
-            description: 'V1.2.1',
+            description: 'V1.2.2',
             fields: [{
               name: 'Commands',
               value: 'To see the current commands for Markos, do !help'
@@ -68,6 +68,11 @@ bot.on("message", message => {
   if (command === "story") {
     message.channel.sendMessage(story[Math.floor(Math.random() * story.length)]);
   }
+
+  if (command === "xd") {
+    message.channel.sendMessage("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
+  }
+
   if (command === "joke") {
     message.channel.sendMessage(joke[Math.floor(Math.random() * joke.length)]);
   }
@@ -94,7 +99,7 @@ bot.on("message", message => {
   }
   if (command === "help") {
     message.channel.sendMessage("Sliding into your DM's...");
-    message.author.sendMessage("\n \nCommands: \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Creators Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
+    message.author.sendMessage("\n \nCommands: \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Creators Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
   }
   if (message.content.startsWith("/say")) {
     if (message.author.id !== "172571295077105664") return;
@@ -106,7 +111,7 @@ bot.on("message", message => {
 
 });
 bot.on("ready", () => {
-  console.log("Markos v1.2.1 loaded successfully.");
+  console.log("Markos v1.2.2 loaded successfully.");
   console.log("Hello, Austin.");
   clever.create(function(err, session) {
   });
