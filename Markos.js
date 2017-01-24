@@ -3,7 +3,7 @@ const config = require("./config.json")
 const Discord = require("discord.js")
 const client = new Discord.Client();
 
-const leet = require("leet")
+const leet = require("1337")
 const Jimp = require("jimp");
 const request = require("request")
 const translator = require("./translate.js")
@@ -27,7 +27,7 @@ client.on("message", msg => {
 	let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
 	let args = msg.content.split(" ").slice(1)
 
-	if (msg.content.startsWith("<@270904126974590976>")) {
+	if (msg.content.startsWith(client.user.toString())) {
 		msg.channel.startTyping()
 		clever.ask(args.join(" "), function(err, response) {
 			msg.channel.stopTyping(true)
@@ -51,7 +51,7 @@ client.on("message", msg => {
 			}, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
 					jsonBody = JSON.parse(body)
-					mesg.edit("", new Discord.RichEmbed()
+					mesg.edit("", {embed: new Discord.RichEmbed()
 					.setColor(3447003)
 					.setAuthor("Markos", client.user.displayAvatarURL)
 					.setDescription("V1.3")
@@ -59,7 +59,7 @@ client.on("message", msg => {
 					.addField("Most Recent Commit", !error ? jsonBody[0].commit.message : "There was an error communicating with GitHub")
 					.addField("Lines of Code", "301")
 					.addField("Requests", "Have a request for a command? Feel free to PM Melmsie#7331, or submit a pull request for Markos [here](https://github.com/melmsie/Markos)")
-					.setTimestamp())
+					.setTimestamp()})
 				}
 			});
 		})
@@ -132,7 +132,7 @@ client.on("message", msg => {
 	}
 
 	if (command === "1337") {
-		msg.reply(l33t((args.join(" "))));
+		msg.reply(leet(args.join(" ")));
 	}
 
 	if (command === "help" || command == "commands" || command === "command") {
@@ -204,9 +204,9 @@ client.on("message", msg => {
 })
 
 client.on("ready", () => {
-	console.log("Markos v1.3 loaded successfully.");
+	console.log("Markos v1.4 loaded successfully.");
 	console.log("Hello, Austin.");
-	client.user.setGame('!help || v1.3');
+	client.user.setGame('!help || v1.4');
 	clever.create(function(err, session) {
 		if (err) return console.log("Error creating cleverbot session")
 		console.log("Cleverbot session created")
