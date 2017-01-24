@@ -54,7 +54,7 @@ client.on("message", msg => {
 					mesg.edit("", {embed: new Discord.RichEmbed()
 					.setColor(3447003)
 					.setAuthor("Markos", client.user.displayAvatarURL)
-					.setDescription("V1.3")
+					.setDescription("V2.0")
 					.addField("Commands", "To see the current commands for Markos, do !help")
 					.addField("Most Recent Commit", !error ? jsonBody[0].commit.message : "There was an error communicating with GitHub")
 					.addField("Lines of Code", "301")
@@ -82,11 +82,11 @@ client.on("message", msg => {
 	}
 
 	if (command === "xd") {
-		msg.channel.sendMessage("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
+		msg.channel.sendFile("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
 	}
 
 	if (command === "joke") {
-		return msg.channel.sendMessage("(You haven't added jokes. Remove this line when you have.)")
+		return msg.channel.sendMessage("(You haven't added jokes. Remove this line when you have.)");
 		msg.channel.sendMessage(joke[Math.floor(Math.random() * joke.length)]);
 	}
 
@@ -95,7 +95,7 @@ client.on("message", msg => {
 	}
 
 	if (command === "ayylmao") {
-		msg.channel.sendMessage(ayy[Math.floor(Math.random() * ayy.length)]);
+		msg.channel.sendFile(ayy[Math.floor(Math.random() * ayy.length)]);
 	}
 
 	if (command === "8ball") {
@@ -104,7 +104,7 @@ client.on("message", msg => {
 	}
 
 	if (command === "lul") {
-		msg.channel.sendMessage('http://files.gamebanana.com/img/ico/sprays/57822c19e1ad1.png');
+		msg.channel.sendFile('http://files.gamebanana.com/img/ico/sprays/57822c19e1ad1.png');
 	}
 
 	if (command === "kappa") {
@@ -204,9 +204,9 @@ client.on("message", msg => {
 })
 
 client.on("ready", () => {
-	console.log("Markos v1.4 loaded successfully.");
+	console.log("Markos v2.0 loaded successfully.");
 	console.log("Hello, Austin.");
-	client.user.setGame('!help || v1.4');
+	client.user.setGame('!help || v2.0');
 	clever.create(function(err, session) {
 		if (err) return console.log("Error creating cleverbot session")
 		console.log("Cleverbot session created")
