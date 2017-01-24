@@ -13,107 +13,110 @@ var ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDy
 var coin = ["Heads", "Tails"];
 var ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"];
 var story = [stories.birth, stories.abusive, stories.confused, stories.birdbees, stories.mom, stories.no, stories.lion, stories.boy];
+var copy = arrays.copy;
+
 bot.on("message", message => {
-  console.log(message.content);
+    console.log(message.content);
     //anti-bot line
-  if (message.author.bot) return;
-  if (message.content.startsWith("<@270904126974590976>")) {
+    if (message.author.bot) return;
+    if (message.content.startsWith("<@270904126974590976>")) {
       clever.ask("", function(err, response) {
         message.reply(response);
       });
     }
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = message.content.split(" ").slice(1);
-  if (command === "cookie") {
-    message.channel.sendMessage("No cookies from me.");
-  }
-  request({
-    url: 'https://api.github.com/repos/Melmsie/Markos/commits',
-    headers: {
-      'User-Agent': 'melmsie'
+    
+    if (message.content.includes("!cookie")) {
+        message.channel.sendMessage("No cookies from me.");
     }
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      jsonBody = JSON.parse(body)
-      if (command === "info") {
-        message.channel.sendMessage("", {
-          embed: {
-            color: 3447003,
-            author: {
-              name: `Markos`,
-              icon_url: bot.user.avatarURL
-            },
-            title: '',
-            description: 'V1.2.2',
-            fields: [{
-              name: 'Commands',
-              value: 'To see the current commands for Markos, do !help'
-            }, {
-              name: 'Most Recent Commit',
-              value: jsonBody[0].commit.message
-            }, {
-              name: 'Lines of Code',
-              value: '170'
-            }, {
-              name: 'Requests',
-              value: 'Have a request for a command? Feel free to PM Melmsie, or submit a pull request for Markos [here](https://github.com/melmsie/Markos).'
-            }],
-            timestamp: new Date(),
-          }
-        });
-      }
+    request({
+        url: 'https://api.github.com/repos/Melmsie/Markos/commits',
+        headers: {
+            'User-Agent': 'melmsie'
+        }
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            jsonBody = JSON.parse(body)
+            if (message.content.includes("!info")) {
+                message.channel.sendMessage("", {
+                    embed: {
+                        color: 3447003,
+                        author: {
+                            name: `Markos`,
+                            icon_url: bot.user.avatarURL
+                        },
+                        title: '',
+                        description: 'V1.2.2',
+                        fields: [{
+                            name: 'Commands',
+                            value: 'To see the current commands for Markos, do !help'
+                        }, {
+                            name: 'Most Recent Commit',
+                            value: jsonBody[0].commit.message
+                        }, {
+                            name: 'Lines of Code',
+                            value: '170'
+                        }, {
+                            name: 'Requests',
+                            value: 'Have a request for a command? Feel free to PM Melmsie, or submit a pull request for Markos [here](https://github.com/melmsie/Markos).'
+                        }],
+                        timestamp: new Date(),
+                    }
+                });
+            }
+        }
+    })
+    if (message.content.includes("!story")) {
+        message.channel.sendMessage(story[Math.floor(Math.random() * story.length)]);
     }
-  })
-  if (command === "story") {
-    message.channel.sendMessage(story[Math.floor(Math.random() * story.length)]);
-  }
 
-  if (command === "xd") {
-    message.channel.sendMessage("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
-  }
+    if (message.content.includes("!xd")) {
+        message.channel.sendMessage("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
+    }
 
-  if (command === "joke") {
-    message.channel.sendMessage(joke[Math.floor(Math.random() * joke.length)]);
-  }
-  if (command === "coin") {
-    message.channel.sendMessage(coin[Math.floor(Math.random() * coin.length)]);
-  }
-  if (command === "ayylmao") {
-    message.channel.sendMessage(ayy[Math.floor(Math.random() * ayy.length)]);
-  }
-  if (command === "8ball") {
-    message.channel.sendMessage(ball[Math.floor(Math.random() * ball.length)]);
-  }
-  if (command === "lul") {
-    message.channel.sendMessage('http://files.gamebanana.com/img/ico/sprays/57822c19e1ad1.png');
-  }
-  if (command === "table") {
-    message.channel.sendMessage('(╯°□°）╯︵ ┻━┻')
-  }
-  if (command === "ping") {
-    message.channel.sendMessage("pong");
-  }
-  if (command === "hug") {
-    message.reply(arrays.hug[Math.floor(Math.random() * arrays.hug.length)]);
-  }
-  if (command === "help") {
-    message.channel.sendMessage("Sliding into your DM's...");
-    message.author.sendMessage("\n \nCommands: \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Creators Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
-  }
-  if (message.content.startsWith("/say")) {
-    if (message.author.id !== "172571295077105664") return;
-    message.channel.sendMessage(args.join(" "));
-    message.delete()
-  }
+    if (message.content.includes("!joke")) {
+        message.channel.sendMessage(joke[Math.floor(Math.random() * joke.length)]);
+    }
+    if (message.content.includes("!coin")) {
+        message.channel.sendMessage(coin[Math.floor(Math.random() * coin.length)]);
+    }
+    if (message.content.includes("!ayylmao")) {
+        message.channel.sendMessage(ayy[Math.floor(Math.random() * ayy.length)]);
+    }
+    if (message.content.includes("!8ball")) {
+        message.channel.sendMessage(ball[Math.floor(Math.random() * ball.length)]);
+    }
+    if (message.content.includes("!lul")) {
+        message.channel.sendMessage('http://files.gamebanana.com/img/ico/sprays/57822c19e1ad1.png');
+    }
+    if (message.content.includes("!table")) {
+        message.channel.sendMessage('(╯°□°）╯︵ ┻━┻')
+    }
+    if (message.content.includes("!copypasta")) {
+        message.channel.sendMessage(copy[Math.floor(Math.random() * copy.length)]);
+    }
+    if (message.content.includes("!ping")) {
+        message.channel.sendMessage("pong");
+    }
+    if (message.content.includes("!hug")) {
+        message.reply(arrays.hug[Math.floor(Math.random() * arrays.hug.length)]);
+    }
+    if (message.content.includes("!help")) {
+        message.channel.sendMessage("Sliding into your DM's...");
+        message.author.sendMessage("\n \nCommands: \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Creators Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
+    }
+    if (message.content.startsWith("/say")) {
+        if (message.author.id !== "172571295077105664") return;
+        message.channel.sendMessage(args.join(" "));
+        message.delete()
+    }
 
-  if (command === 'translate') translate_message(message);
+    if (message.content.includes('!translate')) translate_message(message);
 
 });
 bot.on("ready", () => {
-  console.log("Markos v1.2.2 loaded successfully.");
-  console.log("Hello, Austin.");
-  clever.create(function(err, session) {
+    console.log("Markos v1.2.2 loaded successfully.");
+    console.log("Hello, Austin.");
+    clever.create(function(err, session) {
   });
 });
 bot.login(config.token);
