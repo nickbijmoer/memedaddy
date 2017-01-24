@@ -104,9 +104,16 @@ bot.on("message", message => {
         message.channel.sendMessage("Sliding into your DM's...");
         message.author.sendMessage("\n \nCommands: \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [Creators Only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
     }
+    let args = message.content.split(" ").slice(1);
     if (message.content.startsWith("/say")) {
         if (message.author.id !== "172571295077105664") return;
         message.channel.sendMessage(args.join(" "));
+        message.delete()
+    }
+
+    if (message.content.startsWith("!game")) {
+        if (message.author.id !== "172571295077105664") return;
+        bot.user.setGame(args.join(" "));
         message.delete()
     }
 
