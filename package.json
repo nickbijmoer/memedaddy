@@ -1,26 +1,29 @@
 {
-    "name": "Markos",
-    "version": "1.1.3",
-    "description": "A sassy German/American bot, made for discord.",
-    "main": "mybot.js",
-    "dependencies": {
-        "cleverbot": "^1.0.4",
-        "discord.js": "^11.0.0",
-        "google-translate-api": "^2.2.2",
-        "request": "^2.79.0"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "return 0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/melmsie/Markos.git"
-    },
-    "author": "Melmsie",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/melmsie/Markos/issues"
-    },
-    "homepage": "https://github.com/melmsie/Markos#readme"
+  "name": "Markos",
+  "version": "1.1.3",
+  "description": "A sassy German/American bot, made for discord.",
+  "main": "mybot.js",
+  "dependencies": {
+    "1337": "^1.0.0",
+    "cleverbot": "^1.0.4",
+    "discord.js": "^11.0.0",
+    "giphy-api": "^1.2.3",
+    "google-translate-api": "^2.2.2",
+    "jimp": "^0.2.27",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "return 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melmsie/Markos.git"
+  },
+  "author": "Melmsie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melmsie/Markos/issues"
+  },
+  "homepage": "https://github.com/melmsie/Markos#readme"
 }
