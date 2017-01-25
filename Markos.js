@@ -23,7 +23,7 @@ let story = [stories.birth, stories.abusive, stories.confused, stories.birdbees,
 client.login(config.token)
 
 client.on("message", msg => {
-	console.log(message.content);
+	console.log(msg.content);
 	if (msg.author.bot) return false;
 	
 	let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
