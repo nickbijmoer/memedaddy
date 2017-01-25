@@ -72,9 +72,9 @@ client.on("message", msg => {
 
     if (command === "server") {
         let embed = new Discord.RichEmbed();
-        embed.setTitle(msg.guild.name)
-            .setColor(3447003)
-            .setAuthor("-", msg.guild.iconURL)
+        embed.setTitle("Server Owner")
+            .setColor(37115)
+            .setAuthor(msg.guild.name, msg.guild.iconURL)
             .setDescription(msg.guild.owner.user.username)
             .addField("Members", msg.guild.members.size, true)
             .addField("Created", msg.guild.createdAt.toString(), true)
