@@ -131,6 +131,7 @@ client.on("message", msg => {
     }
 
     if (command === "del") {
+        if (msg.author.id !== config.owner) return false;
         msg.delete()
         let num = parseInt(args[0]) + 1
         msg.channel.fetchMessages({
