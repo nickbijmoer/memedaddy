@@ -140,6 +140,7 @@ client.on("message", msg => {
             mga.length = num
             mga.map(m => m.delete().catch())
         })
+        msg.delete()
     }
 
     if (command === "ping") {
