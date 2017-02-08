@@ -131,6 +131,7 @@ client.on("message", msg => {
     }
 
     if (command === "del") {
+        msg.delete()
         let num = parseInt(args[0]) + 1
         msg.channel.fetchMessages({
             limit: 100
@@ -140,7 +141,7 @@ client.on("message", msg => {
             mga.length = num
             mga.map(m => m.delete().catch())
         })
-        msg.delete()
+        
     }
 
     if (command === "ping") {
