@@ -3,6 +3,7 @@ const config = require("./config.json")
 const Discord = require("discord.js")
 const client = new Discord.Client();
 
+
 const leet = require("1337")
 const Jimp = require("jimp");
 const request = require("request")
@@ -15,6 +16,7 @@ clever.setNick("Markos")
 const stories = require("./stories.json");
 const extras = require("./arrays.json");
 
+let version = " v2.1 "
 let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"];
 let coin = ["Heads", "Tails"]
 let ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"];
@@ -24,14 +26,14 @@ client.login(config.token)
 
 client.on("message", msg => {
     console.log(msg.content);
-
+    if (msg.author.bot) return false;
 
     let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
     let args = msg.content.split(" ").slice(1)
 
     if (msg.content.startsWith(client.user.toString())) {
         msg.channel.startTyping()
-        clever.ask(args.join(" "), function(err, response) {
+        clever.ask(args.join(" "), function (err, response) {
             msg.channel.stopTyping(true)
             msg.reply(response);
         });
@@ -51,17 +53,17 @@ client.on("message", msg => {
                 headers: {
                     'User-Agent': 'melmsie'
                 }
-            }, function(error, response, body) {
+            }, function (client, error, response, body, settings, Discord) {
                 if (!error && response.statusCode == 200) {
                     jsonBody = JSON.parse(body)
                     mesg.edit("", {
                         embed: new Discord.RichEmbed()
                             .setColor(3447003)
                             .setAuthor("Markos", client.user.displayAvatarURL)
-                            .setDescription("V2.0")
+                            .setDescription(version)
                             .addField("Commands", "To see the current commands for Markos, do !help")
                             .addField("Most Recent Commit", !error ? jsonBody[0].commit.message : "There was an error communicating with GitHub")
-                            .addField("Lines of Code", "301")
+                            .addField("Lines of Code", "")
                             .addField("Requests", "Have a request for a command? Feel free to PM Melmsie#7331, or submit a pull request for Markos [here](https://github.com/melmsie/Markos)")
                             .setTimestamp()
                     })
@@ -73,7 +75,7 @@ client.on("message", msg => {
     if (command === "server") {
         let embed = new Discord.RichEmbed();
         embed.setTitle("Server Owner")
-            .setColor(37115)
+            .setColor("#7d5bbe")
             .setAuthor(msg.guild.name, msg.guild.iconURL)
             .setDescription(msg.guild.owner.user.username)
             .addField("Members", msg.guild.members.size, true)
@@ -128,6 +130,18 @@ client.on("message", msg => {
         msg.channel.sendMessage(extras.copy[Math.floor(Math.random() * extras.copy.length)]);
     }
 
+    if (command === "del") {
+        let num = parseInt(args[0]) + 1
+        msg.channel.fetchMessages({
+            limit: 100
+        }).then(msgs => {
+            let mga = msgs.array()
+            mga = mga.filter(m => m.author.id === client.user.id)
+            mga.length = num
+            mga.map(m => m.delete().catch())
+        })
+    }
+
     if (command === "ping") {
         msg.channel.sendMessage(":ping_pong: Pong!")
     }
@@ -154,7 +168,9 @@ client.on("message", msg => {
     if (command === "announce") {
         if (msg.author.id !== config.owner) return false;
         msg.delete()
-        msg.channel.sendMessage(args.join(" "), { tts: true });
+        msg.channel.sendMessage(args.join(" "), {
+            tts: true
+        });
     }
 
     if (command === "game") {
@@ -164,9 +180,14 @@ client.on("message", msg => {
     }
 
     if (command === "gif") {
-        msg.channel.sendMessage("Searching...").then(mesg => {
-            request({ url: 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(args.join(" ")) + '&api_key=' + config.giphy + '&limit=25' }, function(err, res, body) {
-                if (err) { mesg.edit("No gifs found."); return console.log(err); }
+        msg.channel.sendMessage("Searching for your gif...").then(mesg => {
+            request({
+                url: 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(args.join(" ")) + '&api_key=' + config.giphy + '&limit=25'
+            }, function (err, res, body) {
+                if (err) {
+                    mesg.edit("No gifs found.");
+                    return console.log(err);
+                }
                 let jsonBody = JSON.parse(body);
                 if (jsonBody["data"].length === 0) {
                     mesg.edit('No gifs found')
@@ -209,11 +230,11 @@ client.on("message", msg => {
 })
 
 client.on("ready", () => {
-    console.log("Markos v2.0 loaded successfully.");
-    console.log("Hello, Austin.");
-    client.user.setGame('!help || v2.0');
-    clever.create(function(err, session) {
+    console.log("Markos" + version + "loaded successfully.");
+    client.user.setGame('!help ||' + version);
+    clever.create(function (err, session) {
         if (err) return console.log("Error creating cleverbot session")
         console.log("Cleverbot session created")
     });
+    console.log("Welcome, Austin.");
 })

@@ -10,7 +10,8 @@
     "giphy-api": "^1.2.3",
     "google-translate-api": "^2.2.2",
     "jimp": "^0.2.27",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "sloc": "^0.1.11"
   },
   "devDependencies": {},
   "scripts": {
