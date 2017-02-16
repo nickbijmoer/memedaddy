@@ -7,7 +7,6 @@ const client = new Discord.Client();
 const leet = require("1337")
 const Jimp = require("jimp");
 const request = require("request")
-const translator = require("./translate.js")
 
 const cleverbot = require("cleverbot.io")
 clever = new cleverbot(config.cleverbot.token, config.cleverbot.key)
@@ -22,6 +21,27 @@ let coin = ["Heads", "Tails"]
 let ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"];
 let story = [stories.birth, stories.abusive, stories.confused, stories.birdbees, stories.mom, stories.no, stories.lion, stories.boy];
 
+function timeCon(time) {
+    time = time * 1000
+    let days = 0,
+        hours = 0,
+        minutes = 0,
+        seconds = 0
+    days = Math.floor(time / 86400000);
+    time -= days * 86400000
+    hours = Math.floor(time / 3600000);
+    time -= hours * 3600000
+    minutes = Math.floor(time / 60000);
+    time -= minutes * 60000
+    seconds = Math.floor(time / 1000);
+    time -= seconds * 1000
+    days = days > 9 ? days : "0" + days
+    hours = hours > 9 ? hours : "0" + hours
+    minutes = minutes > 9 ? minutes : "0" + minutes
+    seconds = seconds > 9 ? seconds : "0" + seconds
+    return (parseInt(days) > 0 ? days + ":" : "") + (parseInt(hours) === 0 && parseInt(days) === 0 ? "" : hours + ":") + minutes + ":" + seconds
+}
+
 client.login(config.token)
 
 client.on("message", msg => {
@@ -30,6 +50,7 @@ client.on("message", msg => {
 
     let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
     let args = msg.content.split(" ").slice(1)
+
 
     if (msg.content.startsWith(client.user.toString())) {
         msg.channel.startTyping()
@@ -42,72 +63,41 @@ client.on("message", msg => {
 
     if (!msg.content.startsWith(config.prefix)) return false;
 
-    if (command === "cookie") {
-        msg.channel.sendMessage("No :cookie: from me.")
-    }
-
     if (command === "info") {
-        msg.channel.sendMessage("Please wait...").then(mesg => {
-            request({
-                url: 'https://api.github.com/repos/Melmsie/Markos/commits',
-                headers: {
-                    'User-Agent': 'melmsie'
-                }
-            }, function (client, error, response, body, settings, Discord) {
-                if (!error && response.statusCode == 200) {
-                    jsonBody = JSON.parse(body)
-                    mesg.edit("", {
-                        embed: new Discord.RichEmbed()
-                            .setColor(3447003)
-                            .setAuthor("Markos", client.user.displayAvatarURL)
-                            .setDescription(version)
-                            .addField("Commands", "To see the current commands for Markos, do !help")
-                            .addField("Most Recent Commit", !error ? jsonBody[0].commit.message : "There was an error communicating with GitHub")
-                            .addField("Lines of Code", "")
-                            .addField("Requests", "Have a request for a command? Feel free to PM Melmsie#7331, or submit a pull request for Markos [here](https://github.com/melmsie/Markos)")
-                            .setTimestamp()
-                    })
-                }
-            });
-        })
+        const embed = new Discord.RichEmbed()
+            .setTitle('Markos Support Server')
+            .setAuthor('MemeDaddy Markos')
+            .setColor("#3676b3")
+            .setDescription('Here is the latest, dankest, memer info about markos')
+            .setFooter('Need to see my commands? Do !help')
+            .setURL('https://discord.gg/3GNMJBG')
+            .addField('Memory Usage', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} / 1024 MB`, true)
+            .addField('Ping', `${(client.ping).toFixed(0)} ms`, true)
+            .addField('Guilds', client.guilds.size, true)
+
+        msg.channel.sendEmbed(
+            embed, {
+                disableEveryone: true
+            }
+        );
     }
 
     if (command === "server") {
-        let embed = new Discord.RichEmbed();
-        embed.setTitle("Server Owner")
-            .setColor("#7d5bbe")
-            .setAuthor(msg.guild.name, msg.guild.iconURL)
-            .setDescription(msg.guild.owner.user.username)
-            .addField("Members", msg.guild.members.size, true)
-            .addField("Created", msg.guild.createdAt.toString(), true)
-            .addField("Emojis", msg.guild.emojis.size > 0 ? msg.guild.emojis.map(d => d.toString()).join(" ") : "None");
-        msg.channel.sendEmbed(embed)
-    }
-
-    if (command === "story") {
-        msg.channel.sendMessage(story[Math.floor(Math.random() * story.length)]);
+        msg.channel.sendMessage("Oh, need to talk to Melmsie? Check yo DM's boi");
+        msg.author.sendMessage("Here's an invite to the Markos support server: https://discord.gg/3GNMJBG");
     }
 
     if (command === "xd") {
         msg.channel.sendFile("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
     }
 
-    if (command === "joke") {
-        return msg.channel.sendMessage("(You haven't added jokes. Remove this line when you have.)");
-        msg.channel.sendMessage(joke[Math.floor(Math.random() * joke.length)]);
-    }
-
-    if (command === "coin") {
-        msg.channel.sendMessage(coin[Math.floor(Math.random() * coin.length)]);
-    }
-
     if (command === "ayylmao") {
         msg.channel.sendFile(ayy[Math.floor(Math.random() * ayy.length)]);
     }
 
-    if (command === "8ball") {
-        if (!args[0]) return msg.channel.sendMessage("The 8ball cannot answer what is not a question.")
-        msg.channel.sendMessage(ball[Math.floor(Math.random() * ball.length)]);
+    if (command === "invite") {
+        msg.channel.sendMessage("Ok I'll DM you a link, bb"); 
+        msg.author.sendMessage("Use this link to invite me to your server, or I'll meme you to death :wink: \nhttps://discordapp.com/oauth2/authorize?client_id=270904126974590976&scope=bot&permissions=67628096");
     }
 
     if (command === "lul") {
@@ -118,39 +108,30 @@ client.on("message", msg => {
         msg.channel.sendFile("http://vignette4.wikia.nocookie.net/adventuretimewithfinnandjake/images/8/81/Kappa.png")
     }
 
-    if (command === "translate") {
-        translator(msg)
-    }
-
-    if (command === "table") {
-        msg.channel.sendMessage('(╯°□°）╯︵ ┻━┻')
-    }
-
     if (command === "copypasta") {
         msg.channel.sendMessage(extras.copy[Math.floor(Math.random() * extras.copy.length)]);
     }
 
     if (command === "del") {
-        if (msg.author.id !== config.owner) return false;
-        msg.delete()
-        let num = parseInt(args[0]) + 1
-        msg.channel.fetchMessages({
-            limit: 100
-        }).then(msgs => {
-            let mga = msgs.array()
-            mga = mga.filter(m => m.author.id === client.user.id)
-            mga.length = num
-            mga.map(m => m.delete().catch())
-        })
-        
+        if (msg.author.id === config.owner || msg.author.id === msg.guild.ownerID) {
+            msg.delete()
+            let num = parseInt(args[0]) + 1
+            msg.channel.fetchMessages({
+                limit: 100
+            }).then(msgs => {
+                let mga = msgs.array()
+                mga = mga.filter(m => m.author.id === client.user.id)
+                mga.length = num
+                mga.map(m => m.delete().catch())
+            })
+        } else {
+            msg.channel.sendMessage("You don't have permission to use this command! :fire:");
+        }
+
     }
 
     if (command === "ping") {
         msg.channel.sendMessage(":ping_pong: Pong!")
-    }
-
-    if (command === "hug") {
-        msg.reply(extras.hug[Math.floor(Math.random() * extras.hug.length)]);
     }
 
     if (command === "1337") {
@@ -159,21 +140,14 @@ client.on("message", msg => {
 
     if (command === "help" || command == "commands" || command === "command") {
         msg.channel.sendMessage("Sliding into your DM's...");
-        msg.author.sendMessage("\n \nCommands: \n \n`!1337 [message]` - 1'Ll 3nc0d3 Y0uR Me5s@g3 1Nt0 l337sp3@K! \n \n`!triggered [tag user]` - Ｔｒｉｇｇｅｒｅｄ \n \n`!copypasta` - Returns a random ｃｏｐｙｐａｓｔａ \n \n`!game [input]` - Will set Markos' Game status [owner only] \n \n`!gif [search term(s)]` - Will search for a gif \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [owner only] \n \n`!cookie` - Markos doesn't give cookies. \n" + "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
+        msg.author.sendMessage("\n \nCommands: \n \n`!1337 [message]` - 1'Ll 3nc0d3 Y0uR Me5s@g3 1Nt0 l337sp3@K! \n \n`!triggered [tag user]` - Ｔｒｉｇｇｅｒｅｄ \n \n`!copypasta` - Returns a random ｃｏｐｙｐａｓｔａ \n \n`!game [input]` - Will set Markos' Game status [guild owner only] \n \n`!gif [search term(s)]` - Will search for a gif \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [guild owner only] \n \n`!cookie` - Markos doesn't give cookies. \n" +
+            "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
     }
 
     if (command === "say") {
         if (msg.author.id !== config.owner) return false;
         msg.delete();
         msg.channel.sendMessage(args.join(" "))
-    }
-
-    if (command === "announce") {
-        if (msg.author.id !== config.owner) return false;
-        msg.delete()
-        msg.channel.sendMessage(args.join(" "), {
-            tts: true
-        });
     }
 
     if (command === "game") {
