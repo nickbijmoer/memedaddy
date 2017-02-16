@@ -15,32 +15,9 @@ clever.setNick("Markos")
 const stories = require("./stories.json");
 const extras = require("./arrays.json");
 
-let version = " v2.1 "
+let version = " v2.3 "
 let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"];
-let coin = ["Heads", "Tails"]
-let ball = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", "It is certain", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "It is certain", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"];
-let story = [stories.birth, stories.abusive, stories.confused, stories.birdbees, stories.mom, stories.no, stories.lion, stories.boy];
 
-function timeCon(time) {
-    time = time * 1000
-    let days = 0,
-        hours = 0,
-        minutes = 0,
-        seconds = 0
-    days = Math.floor(time / 86400000);
-    time -= days * 86400000
-    hours = Math.floor(time / 3600000);
-    time -= hours * 3600000
-    minutes = Math.floor(time / 60000);
-    time -= minutes * 60000
-    seconds = Math.floor(time / 1000);
-    time -= seconds * 1000
-    days = days > 9 ? days : "0" + days
-    hours = hours > 9 ? hours : "0" + hours
-    minutes = minutes > 9 ? minutes : "0" + minutes
-    seconds = seconds > 9 ? seconds : "0" + seconds
-    return (parseInt(days) > 0 ? days + ":" : "") + (parseInt(hours) === 0 && parseInt(days) === 0 ? "" : hours + ":") + minutes + ":" + seconds
-}
 
 client.login(config.token)
 
@@ -64,16 +41,44 @@ client.on("message", msg => {
     if (!msg.content.startsWith(config.prefix)) return false;
 
     if (command === "info") {
+
+        function timeCon(time) {
+            time = time * 1000
+            let days = 0,
+                hours = 0,
+                minutes = 0,
+                seconds = 0
+            days = Math.floor(time / 86400000);
+            time -= days * 86400000
+            hours = Math.floor(time / 3600000);
+            time -= hours * 3600000
+            minutes = Math.floor(time / 60000);
+            time -= minutes * 60000
+            seconds = Math.floor(time / 1000);
+            time -= seconds * 1000
+            days = days > 9 ? days : "0" + days
+            hours = hours > 9 ? hours : "0" + hours
+            minutes = minutes > 9 ? minutes : "0" + minutes
+            seconds = seconds > 9 ? seconds : "0" + seconds
+            return (parseInt(days) > 0 ? days + ":" : "") + (parseInt(hours) === 0 && parseInt(days) === 0 ? "" : hours + ":") + minutes + ":" + seconds
+        }
+
+
         const embed = new Discord.RichEmbed()
             .setTitle('Markos Support Server')
             .setAuthor('MemeDaddy Markos')
             .setColor("#3676b3")
-            .setDescription('Here is the latest, dankest, memer info about markos')
+            .setDescription(version)
             .setFooter('Need to see my commands? Do !help')
             .setURL('https://discord.gg/3GNMJBG')
+
             .addField('Memory Usage', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} / 1024 MB`, true)
             .addField('Ping', `${(client.ping).toFixed(0)} ms`, true)
+            .addField('Uptime', `${timeCon(process.uptime())}`, true)
             .addField('Guilds', client.guilds.size, true)
+            .addField('Recenty Joined Guild', client.guilds.last().name, true)
+            
+
 
         msg.channel.sendEmbed(
             embed, {
@@ -87,6 +92,12 @@ client.on("message", msg => {
         msg.author.sendMessage("Here's an invite to the Markos support server: https://discord.gg/3GNMJBG");
     }
 
+    if (command === "joinedservers") {
+        if (msg.author.id === config.owner) {
+            msg.channel.sendMessage(client.guilds.array())
+        }
+    }
+
     if (command === "xd") {
         msg.channel.sendFile("https://cdn.discordapp.com/attachments/248546890361077760/272125523705069568/Screen_Shot_2017-01-05_at_3.05.28_PM_copy.png")
     }
@@ -96,7 +107,7 @@ client.on("message", msg => {
     }
 
     if (command === "invite") {
-        msg.channel.sendMessage("Ok I'll DM you a link, bb"); 
+        msg.channel.sendMessage("Ok I'll DM you a link, bb");
         msg.author.sendMessage("Use this link to invite me to your server, or I'll meme you to death :wink: \nhttps://discordapp.com/oauth2/authorize?client_id=270904126974590976&scope=bot&permissions=67628096");
     }
 
@@ -140,8 +151,8 @@ client.on("message", msg => {
 
     if (command === "help" || command == "commands" || command === "command") {
         msg.channel.sendMessage("Sliding into your DM's...");
-        msg.author.sendMessage("\n \nCommands: \n \n`!1337 [message]` - 1'Ll 3nc0d3 Y0uR Me5s@g3 1Nt0 l337sp3@K! \n \n`!triggered [tag user]` - Ｔｒｉｇｇｅｒｅｄ \n \n`!copypasta` - Returns a random ｃｏｐｙｐａｓｔａ \n \n`!game [input]` - Will set Markos' Game status [guild owner only] \n \n`!gif [search term(s)]` - Will search for a gif \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [guild owner only] \n \n`!cookie` - Markos doesn't give cookies. \n" +
-            "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!hug` - Do you get a hug from Markos? \n \n`!ayylmao` - ayyyyyy \n " + "\n`!translate [input]` - Translate anything to English! \n \n`!8ball [message]` - Markos consults his magic 8-ball for you \n \n`!coin` - Flip a coin \n" + "\n`!story` - Markos will tell you a story.");
+        msg.author.sendMessage("\n \nCommands: \n \n`!1337 [message]` - 1'Ll 3nc0d3 Y0uR Me5s@g3 1Nt0 l337sp3@K! \n \n`!triggered [tag user]` - Ｔｒｉｇｇｅｒｅｄ \n \n`!copypasta` - Returns a random ｃｏｐｙｐａｓｔａ \n \n`!game [input]` - Will set Markos' Game status [bot owner only] \n \n`!gif [search term(s)]` - Will search for a gif \n \n`!xd` - XD \n \n`!info` - Displays current info for Markos \n \n`!say [message]` - Speak on behalf of Markos. [guild owner only] \n \n`!cookie` - Markos doesn't give cookies. \n" +
+            "\n`!table` - Only use when you're angry. \n \n`!ping` - Pong! \n \n`!lul` - LUL \n \n`!ayylmao` - ayyyyyy \n ");
     }
 
     if (command === "say") {
