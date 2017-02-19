@@ -74,7 +74,7 @@ client.on("message", msg => {
             .setAuthor('MemeDaddy Markos')
             .setColor("#3676b3")
             .setDescription(version)
-            .setFooter('Need to see my commands? Do !help')
+            .setFooter('Need to see my commands? Do pls help')
             .setURL('https://discord.gg/3GNMJBG')
 
             .addField('Memory Usage', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
