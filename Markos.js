@@ -22,7 +22,7 @@ let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDy
 client.login(config.token)
 
 client.on("guildCreate", guild => {
-        guild.owner.user.dmChannel.sendMessage(" Hello there! My name is Markos.\n \nI'm the ｄａｎｋｅｓｔ memer bot there is.\n \nJust remember that my prefix is pls `pls help`.\n \nIf you have questions or requests for new features, you can ask my owner himself. Just do 'pls server'.\n \nHave a ")
+        guild.owner.user.dmChannel.sendMessage(" Hello there! My name is Markos.\n \nI'm the ｄａｎｋｅｓｔ memer bot there is.\n \nJust remember that my prefix is pls `pls help`.\n \nIf you have questions or requests for new features, you can ask my owner himself. Just do 'pls server'.\n \nHave a dank day!")
     })
 
 client.on("message", msg => {
