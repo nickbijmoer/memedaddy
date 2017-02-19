@@ -35,6 +35,7 @@ client.on("message", msg => {
 
 
     if (msg.content.startsWith(client.user.toString())) {
+        let args = msg.content.split(" ").slice(1)
         msg.channel.startTyping()
         clever.ask(args.join(" "), function (err, response) {
             msg.channel.stopTyping(true)
