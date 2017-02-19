@@ -30,7 +30,7 @@ client.on("message", msg => {
     console.log(msg.content);
 
     let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
-    let args = msg.content.split(" ").slice(1)
+    let args = msg.content.split(" ").slice(2)
 
 
     if (msg.content.startsWith(client.user.toString())) {
