@@ -15,7 +15,7 @@ clever.setNick("Markos")
 const stories = require("./stories.json");
 const extras = require("./arrays.json");
 
-let version = "v2.4"
+let version = "v2.5"
 let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"];
 
 
@@ -26,25 +26,22 @@ client.on("guildCreate", guild => {
     })
 
 client.on("message", msg => {
-    if (!msg.content.startsWith(config.prefix)) return false;
     if (msg.author.bot) return false;
     console.log(msg.content);
 
     let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
-    let args = msg.content.split(" ").slice(2)
+    let args = msg.content.split(" ").slice(1)
 
 
     if (msg.content.startsWith(client.user.toString())) {
-        let args = msg.content.split(" ").slice(1)
         msg.channel.startTyping()
         clever.ask(args.join(" "), function (err, response) {
             msg.channel.stopTyping(true)
             msg.reply(response);
+            
         });
     }
-    if (msg.author.bot) return false;
-
-    if (!msg.content.startsWith(config.prefix)) return false;
+if (!msg.content.startsWith(config.prefix)) return false;
 
     if (command === "info") {
 
@@ -71,7 +68,7 @@ client.on("message", msg => {
 
 
         const embed = new Discord.RichEmbed()
-            .setTitle('Markos/Nitro Support Server')
+            .setTitle('Markos/Nitrus Support Server')
             .setAuthor('MemeDaddy Markos')
             .setColor("#3676b3")
             .setDescription(version)
@@ -94,7 +91,7 @@ client.on("message", msg => {
 
     if (command === "server") {
         msg.channel.sendMessage("Oh, need to talk to Melmsie? Ｃｈｅｃｋ　ｙｏ　ＤＭ＇ｓ　ｂｏｉ");
-        msg.author.sendMessage("Here's an invite to the Markos support server: https://discord.gg/3GNMJBG");
+        msg.author.sendMessage("Here's an invite to the Markos/Nitrus support server: https://discord.gg/3GNMJBG");
     }
 
     if (command === "vaporwave") {
