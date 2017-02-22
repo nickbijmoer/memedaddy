@@ -1,15 +1,13 @@
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
 # Markos
-A sassy German/American bot, made for discord. 
+A sassy meme bot, made for discord. 
 
 
 ## Features in Progress:
 
-Cleverbot integration
-
-
-## Commands in Progress: 
-
-!translate [message] - translates whatever the message is into English. *this is helpful if you want to talk to Markos, but don't know German*
-
+Memes you didn't even ask for
+Voice chat memes
+Reaction memes
 
 
