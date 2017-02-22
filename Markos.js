@@ -1,7 +1,7 @@
 const config = require("./config.json")
+const settings = require('./settings.json');
 const Discord = require("discord.js")
 const client = new Discord.Client();
-const commands = require('./commands.js');
 
 let version = "v2.5"
 
