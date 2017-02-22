@@ -16,8 +16,6 @@ const stories = require("./stories.json");
 const extras = require("./arrays.json");
 
 let version = "v2.5"
-let ayy = ["http://i.imgur.com/G1h11mQ.png", "https://giphy.com/gifs/6OEeB9rxvDyzC", "https://s-media-cache-ak0.pinimg.com/originals/06/c0/9b/06c09be319e549e0fccaa88424ea271a.jpg", "http://i3.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg", "http://t6.rbxcdn.com/f9407db64c8f16abc58ce0ff44741534", "https://i.ytimg.com/vi/kiEqGhgWf5Y/maxresdefault.jpg"];
-
 
 client.login(config.token)
 
@@ -91,6 +89,10 @@ if (!msg.content.startsWith(config.prefix)) return false;
         msg.author.sendMessage("Here's an invite to the Markos/Nitrus support server: https://discord.gg/3GNMJBG");
     }
 
+    if (command === "test") {
+        msg.channel.sendMessage(client.guilds.last().name);
+    }
+
     if (command === "vaporwave") {
         let text = args.join(" ").replace(/a/gi, "ａ").replace(/b/gi, "ｂ").replace(/c/gi, "ｃ").replace(/d/gi, "ｄ").replace(/e/gi, "ｅ").replace(/f/gi, "ｆ").replace(/g/gi, "ｇ").replace(/h/gi, "ｈ").replace(/i/gi, "ｉ").replace(/j/gi, "ｊ").replace(/k/gi, "ｋ").replace(/l/gi, "ｌ").replace(/m/gi, "ｍ").replace(/n/gi, "ｎ").replace(/o/gi, "ｏ").replace(/p/gi, "ｐ").replace(/q/gi, "ｑ").replace(/r/gi, "ｒ").replace(/s/gi, "ｓ").replace(/t/gi, "ｔ").replace(/u/gi, "ｕ").replace(/v/gi, "ｖ").replace(/w/gi, "ｗ").replace(/x/gi, "ｘ").replace(/y/gi, "ｙ").replace(/z/gi, "ｚ")
         msg.reply("**" + text + "**")
@@ -111,7 +113,7 @@ if (!msg.content.startsWith(config.prefix)) return false;
     }
 
     if (command === "ayylmao") {
-        msg.channel.sendFile(ayy[Math.floor(Math.random() * ayy.length)]);
+        msg.channel.sendMessage(extras.ayy[Math.floor(Math.random() * extras.ayy.length)]);
     }
 
     if (command === "invite") {
