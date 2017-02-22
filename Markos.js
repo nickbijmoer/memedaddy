@@ -3,7 +3,7 @@ const settings = require('./settings.json');
 const Discord = require("discord.js")
 const client = new Discord.Client();
 
-let version = "v2.5"
+let version = "v3"
 
 client.login(config.token)
 
@@ -19,7 +19,7 @@ client.on("message", msg => {
 })
 
 client.on("ready", () => {
-    console.log("Markos " + version + " loaded successfully.");
+    console.log("Markos " + version + " loaded successfully. Dank.");
     client.user.setGame('pls help || ' + version);
     clever.create(function (err, session) {
         if (err) return console.log("Error creating cleverbot session")

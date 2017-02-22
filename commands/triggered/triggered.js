@@ -1,6 +1,9 @@
 const Jimp = require("jimp");
-    
-    if (command === "triggered") {
+
+
+module.exports = {
+    usage: 'triggered <mention user> - triggers said user',
+    run: (client, msg, cmdArgs) => {
         if (msg.mentions.users.size === 0) return msg.channel.sendMessage("You must mention a user!")
         msg.channel.sendMessage(":gear: Generating... please wait.").then(mesg => {
             Jimp.read(msg.mentions.users.first().displayAvatarURL, (err, avatar) => {
@@ -23,3 +26,4 @@ const Jimp = require("jimp");
             })
         })
     }
+}
