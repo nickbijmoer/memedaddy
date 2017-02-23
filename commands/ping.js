@@ -1,6 +1,5 @@
-module.exports = {
-    usage: 'ping - pong! (and the actual bot ping)',
-    run: (client, msg, command) => {
-        msg.channel.sendMessage(':ping_pong: Pong! *${(client.ping).toFixed(0)} ms*')
+exports.run = function(client, msg, command) {
+    //usage: 'ping - pong! (and the actual bot ping)',
+    
+        msg.channel.sendMessage(':ping_pong: Pong!')
     }
-}
