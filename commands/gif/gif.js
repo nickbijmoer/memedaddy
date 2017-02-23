@@ -1,6 +1,8 @@
 const request = require("request")
 
-if (command === "gif") {
+module.exports = {
+    usage: 'gif <search terms> - searches for a gif from giphy',
+    run: (client, msg, args) => {
         msg.channel.sendMessage("Ｓｅａｒｃｈｉｎｇ　ｆｏｒ　ｙｏｕｒ　ｇｉｆ．．．").then(mesg => {
             request({
                 url: 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(args.join(" ")) + '&api_key=' + config.giphy + '&limit=25'
@@ -22,3 +24,4 @@ if (command === "gif") {
             })
         })
     }
+}

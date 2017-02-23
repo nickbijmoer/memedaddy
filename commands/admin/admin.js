@@ -1,5 +1,6 @@
-    if (command === "info") {
-
+module.exports = {
+    usage: 'info - Displays some basic info about Markos',
+    run: (client, msg) => {
         function timeCon(time) {
             time = time * 1000
             let days = 0,
@@ -43,24 +44,36 @@
             }
         );
     }
+}
 
-    if (command === "server") {
+module.exports = {
+    usage: 'support - Need Markos support? Get a link to the Markos support server!',
+    run: (client, msg) => {
         msg.channel.sendMessage("Oh, need to talk to Melmsie? Ｃｈｅｃｋ　ｙｏ　ＤＭ＇ｓ　ｂｏｉ");
         msg.author.sendMessage("Here's an invite to the Markos/Nitrus support server: https://discord.gg/3GNMJBG");
     }
+}
 
-    if (command === "servers") {
+module.exports = {
+    usage: 'joined - Displays the servers Markos has joined.',
+    run: (client, msg, command) => {
         if (msg.author.id === config.owner) {
             msg.channel.sendMessage(client.guilds.array())
         }
     }
+}
 
-    if (command === "invite") {
+module.exports = {
+    usage: 'invite - Markos will DM you a link to invite him to a server you own/have perms to.',
+    run: (client, msg, command) => {
         msg.channel.sendMessage("Ok I'll DM you a link, bb");
         msg.author.sendMessage("Use this link to invite me to your server, or I'll ｍｅｍｅ　ｙｏｕ　ｔｏ　ｄｅａｔｈ :wink: \nhttps://discordapp.com/oauth2/authorize?client_id=270904126974590976&scope=bot&permissions=67628096");
     }
+}
 
-    if (command === "del") {
+module.exports = {
+    usage: 'del <number> - Deletes up to 100 messages that markos has sent.',
+    run: (client, msg, command) => {
         if (msg.author.id === config.owner || msg.author.id === msg.guild.ownerID) {
             msg.delete()
             let num = parseInt(args[0]) + 1
@@ -75,27 +88,30 @@
         } else {
             msg.channel.sendMessage("You don't have permission to use this command! :fire:");
         }
-
     }
-
-    if (command === "help" || command == "commands" || command === "command") {
-        msg.channel.sendMessage("Sliding into your DM's...");
-        msg.author.sendMessage("\n \n**Commands:** \n \n**1337 [message]** - *1'Ll 3nc0d3 Y0uR Me5s@g3 1Nt0 l337sp3@K!*\n \n**triggered [tag user]** - Ｔｒｉｇｇｅｒｅｄ\n \n**copypasta** - *Returns a random ｃｏｐｙｐａｓｔａ*\n \n**game [input]** - *Will set Markos' Game status [bot owner only]*\n \n**gif [search term(s)]** - *Will search for a gif*\n \n**xd** - *XD*\n \n**info** - *Displays current info for Markos*\n \n**say [message]** - *Speak on behalf of Markos. [guild owner only]*\n" +
-            "\n**ping** - *Pong!*\n \n**lul** - *LUL*\n \n**ayylmao** - *ayyyyyy*\n \n**server** - *Oh, need to talk to Melmsie? Do this one.*\n \n**kappa** - *Kappa. Duh.*\n \n**vaporwave** - ｖａｐｏｒｗａｖｅ ｙｏｕｒ ｔｅｘｔ ｕｐ\n \n**superscript** - ᵐᵃᵏᵉ ʸᵒᵘʳ ᵗᵉˣᵗ ᵗᵉᵉⁿʸ");
-    }
-
-    if (command === "game") {
+}
+module.exports = {
+    usage: 'game <game status> - Displays whatever the <game status> is, as Markos\' playing status. Bot owner only.',
+    run: (client, msg, command, args) => {
         if (msg.author.id !== config.owner) return false;
         msg.delete()
         client.user.setGame(args.join(" "));
     }
+}
 
-    if (command === "ping") {
+module.exports = {
+    usage: 'ping - pong! (and the actual bot ping)',
+    run: (client, msg, command) => {
         msg.channel.sendMessage(':ping_pong: Pong! *${(client.ping).toFixed(0)} ms*')
     }
+}
 
-    if (command === "say") {
-        if (msg.author.id !== config.owner) return false;
-        msg.delete();
-        msg.channel.sendMessage(args.join(" "))
+module.exports = {
+    usage: 'say <message> - Displays whatever the <message> is, as Markos. Guild Owner Only.',
+    run: (client, msg, command, args) => {
+        if (msg.author.id === config.owner || msg.author.id === msg.guild.ownerID) {
+            msg.delete();
+            msg.channel.sendMessage(args.join(" "))
+        }
     }
+}
