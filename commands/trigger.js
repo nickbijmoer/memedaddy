@@ -1,16 +1,15 @@
 const Jimp = require("jimp");
 
 
-module.exports = {
-    usage: 'triggered <mention user> - triggers said user',
-    run: (client, msg, cmdArgs) => {
+exports.run = function(client, msg, args){
+    //usage: 'trigger <mention user> - triggers said user',
         if (msg.mentions.users.size === 0) return msg.channel.sendMessage("You must mention a user!")
         msg.channel.sendMessage(":gear: Generating... please wait.").then(mesg => {
             Jimp.read(msg.mentions.users.first().displayAvatarURL, (err, avatar) => {
                 if (err) return mesg.edit(":warning: Failed to generate image")
-                Jimp.read('./triggered.jpg', (err, text) => {
+                Jimp.read('./commands/triggered.jpg', (err, text) => {
                     if (err) return mesg.edit(":warning: Failed to generate image")
-                    Jimp.read('./red.png', (err, tint) => {
+                    Jimp.read('./commands/red.png', (err, tint) => {
                         if (err) return mesg.edit(":warning: Failed to generate image")
                         tint.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
                         tint.opacity(0.2)
@@ -20,10 +19,10 @@ module.exports = {
                         avatar.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
                             mesg.delete()
                             msg.channel.sendFile(buffer)
+                            msg.channel.sendMessage(args + ' **is triggered**')
                         })
                     })
                 })
             })
         })
     }
-}
