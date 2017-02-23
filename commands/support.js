@@ -5,3 +5,4 @@ module.exports = {
         msg.author.sendMessage("Here's an invite to the Markos/Nitrus support server: https://discord.gg/3GNMJBG");
     }
 }
+exports.help = "Markos will send you a link to the support server."

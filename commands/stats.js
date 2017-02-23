@@ -17,3 +17,5 @@ exports.run = function (client, msg, args, settings, Discord) {
         embed: embed
     });
 };
+
+exports.help = "Returns stats about Markos."

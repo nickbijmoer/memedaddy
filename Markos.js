@@ -17,24 +17,37 @@ client.on("message", msg => {
   let command = msg.content.substring(config.prefix.length).toLowerCase().split(" ")[0]
   let args = msg.content.split(" ").slice(2)
 
-  fs.access("./commands/" + command + ".js", fs.constants.R_OK, (err) => {
-    if (err) return false;
-    try {
-      delete require.cache[require.resolve("./commands/" + command)];
-      let comm = require("./commands/" + command);
-      comm.run(client, msg, args, config, Discord);
-    } catch (e) {
-      console.log(e)
-    };
-  });
+  if (command === "help") {
+    if (args[0]) {
+      msg.channel.sendMessage(require(`./${args[0]}`).help)
+    } else {
+      let arr = [];
+      fs.readdirSync("./commands/").forEach(function (file) {
+        arr.push(file.replace(".js", ""));
+      });
+      msg.channel.sendMessage(`**Available commands:**\n${arr.join(", ")}`);
+    }
+  } else {
+    fs.access("./commands/" + command + ".js", fs.constants.R_OK, (err) => {
+      if (err) return false;
+      try {
+        delete require.cache[require.resolve("./commands/" + command)];
+        let comm = require("./commands/" + command);
+        comm.run(client, msg, args, settings, Discord);
+      } catch (e) {
+        console.log(e)
+      };
+    });
+  };
 })
 
+
 client.on("ready", () => {
-    console.log("Markos " + config.version + " loaded successfully. 👌");
-    client.user.setGame('pls help 👌 👀');
-    clever.create(function (err, session) {
-        if (err) return console.log("Error creating cleverbot session")
-        console.log("Cleverbot session created. 👌")
-    });
-    console.log("Welcome, Austin. 👀");
+  console.log("Markos " + config.version + " loaded successfully. 👌");
+  client.user.setGame('pls help 👌 👀');
+  clever.create(function (err, session) {
+    if (err) return console.log("Error creating cleverbot session")
+    console.log("Cleverbot session created. 👌")
+  });
+  console.log("Welcome, Austin. 👀");
 })

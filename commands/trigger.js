@@ -26,3 +26,4 @@ exports.run = function(client, msg, args){
             })
         })
     }
+exports.help = "Triggers the mentioned user."

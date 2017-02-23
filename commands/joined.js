@@ -5,3 +5,4 @@ exports.run = function(client, msg, args, config){
             msg.channel.sendMessage(client.guilds.array())
         }
     }
+exports.help = "Returns the servers that Markos is in. [Bot owner only]"

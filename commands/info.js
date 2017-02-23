@@ -44,3 +44,5 @@ exports.run = function(client, msg, args, settings, Discord){
             }
         );
     }
+
+exports.help = "Returns information about Markos and his Creator."

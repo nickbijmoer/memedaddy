@@ -3,3 +3,5 @@ exports.run = function(client, msg) {
     
         msg.channel.sendMessage(':ping_pong: Pong!')
     }
+
+    exports.help = "Classic ping => pong."
