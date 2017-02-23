@@ -1,6 +1,6 @@
-module.exports = {
-    usage: 'info - Displays some basic info about Markos',
-    run: (client, msg) => {
+exports.run = function(client, msg, args, settings, Discord){
+    //usage: 'info - Displays some basic info about Markos',
+    
         function timeCon(time) {
             time = time * 1000
             let days = 0,
@@ -27,7 +27,7 @@ module.exports = {
             .setTitle('Markos/Nitrus Support Server')
             .setAuthor('MemeDaddy Markos')
             .setColor("#3676b3")
-            .setDescription(version)
+            .setDescription('yo')
             .setFooter('Need to see my commands? Do pls help')
             .setURL('https://discord.gg/3GNMJBG')
 
@@ -44,4 +44,3 @@ module.exports = {
             }
         );
     }
-}

@@ -1,5 +1,6 @@
 {
     "prefix": "pls ",
+    "version": "v3",
     "commands": [
         "help",
         "1337",
