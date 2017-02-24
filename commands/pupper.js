@@ -7,7 +7,7 @@ exports.run = function (client, msg) {
                 msg.channel.sendFile(`http://random.dog/${data}`);
             });
             mesg.delete();
-        }, 3000) 
+        }, 3000)
     });
 };
 

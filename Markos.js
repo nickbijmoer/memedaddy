@@ -33,7 +33,7 @@ client.on("message", msg => {
       try {
         delete require.cache[require.resolve("./commands/" + command)];
         let comm = require("./commands/" + command);
-        comm.run(client, msg, args, settings, Discord);
+        comm.run(client, msg, args, config, Discord);
       } catch (e) {
         console.log(e)
       };
