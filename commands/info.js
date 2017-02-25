@@ -23,4 +23,4 @@ exports.run = function(client, msg, args, config, Discord){
         );
     }
 
-exports.help = "Returns information about Markos and his Creator."
+exports.help = "**Usage: \`pls info\`**\nUse this command to see some info about Markos and Melmsie."

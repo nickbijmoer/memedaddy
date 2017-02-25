@@ -26,4 +26,4 @@ exports.run = function(client, msg, args){
             })
         })
     }
-exports.help = "Triggers the mentioned user."
+exports.help = "**Usage: \`pls trigger\`**\nMakes the tagged user angry. *Does not work with gifs*"

@@ -1,8 +1,17 @@
 const leet = require("1337")
 
 exports.run = function (client, msg, args) {
-    //usage: 'leet <message> - Displays whatever the <message> is, in 1337 form.',
-    msg.reply(leet(args.join(" ")));
+    try {
+        if (args.length === 0) {
+            msg.reply('You need to include a message to leet!')
+        } else {
+            msg.react("👌")
+            msg.reply(leet(args.join(" ")));
+        }
+    } catch (e) {
+        console.log(e)
+    };
 }
 
-exports.help = "Translates your message into 1337 speak."
+exports.help = "**Usage: \`pls leet <message to leet>\`**\nThis turns your text into 1337 5p34k"
+

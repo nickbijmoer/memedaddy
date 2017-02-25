@@ -19,13 +19,13 @@ client.on("message", msg => {
 
   if (command === "help") {
     if (args[0]) {
-      msg.sendMessage(require(`./commands/${args[0]}`).help)
+      msg.channel.sendMessage(require(`./commands/${args[0]}`).help)
     } else {
       let arr = [];
       fs.readdirSync("./commands/").forEach(function (file) {
         arr.push(file.replace(".js", ""));
       });
-      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${arr.join("\n")}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\nIf you find any bugs or errors, please do \`pls bug <message to be sent>\``);
+      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${arr.join("\n")}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\n\nIf you find any bugs or errors, please do \`pls bug <bug report>\``);
     }
   } else {
     fs.access("./commands/" + command + ".js", fs.constants.R_OK, (err) => {

@@ -10,4 +10,4 @@ exports.run = function (client, msg, args, config) {
     }
 }
 
-exports.help = "Reboots the bot in case of an error [Bot owner only]"
+exports.help = "**Usage: \`pls reboot\`**\n[Melmsie Only] Will restart Markos."

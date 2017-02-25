@@ -14,4 +14,4 @@ exports.run = function (client, msg) {
     });
 };
 
-exports.help = "Returns a random dog picture."
+exports.help = "**Usage: \`pls pupper\`**\nSee the cutest thing since sliced bread AKA a pupper."

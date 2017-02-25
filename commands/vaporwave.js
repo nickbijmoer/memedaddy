@@ -4,4 +4,4 @@ exports.run = function (client, msg, args) {
     msg.reply("**" + text + "**")
 }
 
-exports.help = "Takes your message and makes translates into vaporwave."
+exports.help = "**Usage: \`pls vaporwave <message to vaporwave>\`**\nｉｔ ｄｏｅｓ ｔｈｉｓ"
