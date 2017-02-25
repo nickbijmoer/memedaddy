@@ -23,8 +23,7 @@ exports.run = function (client, msg) {
     .then(_ => m.react("✔"))
     .then(_ => m.react("🍪"))
     .then(_ => m.react("💀"))
-    .then(_ => m.react("🔝"))
-    .then(_ => m.react("❌")))
+    .then(_ => m.react("🔝")))
 }
 
 exports.help = "Displays some 👌👀👌👀👌👀👌👀👌👀 good shit go౦ԁ sHit👌"
