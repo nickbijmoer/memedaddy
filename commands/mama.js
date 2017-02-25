@@ -13,4 +13,4 @@ exports.run = function (client, msg) {
         }
     })
 }
-exports.help = "**Usage: \`pls mama\`**\nYo mama use this command SO MUCH."
+exports.help = "**Usage: \`pls mama\`**\nYo mama uses this command SO MUCH..."
