@@ -1,5 +1,5 @@
 const rp = require('request-promise');
-
+const arrays = require('./../arrays.json');
 exports.run = function (client, msg) {
     msg.channel.sendMessage(arrays.cat[Math.floor(Math.random() * arrays.cat.length)]).then(mesg => {
         setTimeout(() => {
@@ -8,9 +8,6 @@ exports.run = function (client, msg) {
             });
             mesg.delete();
         }, 2500)
-        if (err) {
-            msg.channel.sendMessage('The kitty ran away :(')
-        }
     });
 };
 
