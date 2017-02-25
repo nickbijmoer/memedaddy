@@ -7,9 +7,9 @@ exports.run = function(client, msg, args){
         msg.channel.sendMessage(":gear: Generating... please wait.").then(mesg => {
             Jimp.read(msg.mentions.users.first().displayAvatarURL, (err, avatar) => {
                 if (err) return mesg.edit(":warning: Failed to generate image")
-                Jimp.read('./commands/triggered.jpg', (err, text) => {
+                Jimp.read('./triggered.jpg', (err, text) => {
                     if (err) return mesg.edit(":warning: Failed to generate image")
-                    Jimp.read('./commands/red.png', (err, tint) => {
+                    Jimp.read('./red.png', (err, tint) => {
                         if (err) return mesg.edit(":warning: Failed to generate image")
                         tint.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
                         tint.opacity(0.2)

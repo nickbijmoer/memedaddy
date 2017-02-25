@@ -12,7 +12,7 @@ exports.run = function(client, msg, args, config, Discord){
             .addField('About Melmsie', `Melmsie is a freelance web developer and a gamer at heart. You can catch him playing Overwatch most of the time.`)
             .addField('About Markos', `Markos is a German name, because Melmsie speaks a fair amount of German, and just loves that name. Deal with it.`)
             .addField('Upcoming Features', `Voice memes, cleverbot, and more shitposting`)
-            .addField('Find a bug?', 'Contact Melmsie via pls bug <message>')
+            .addField('Find a bug?', 'Contact Melmsie#7331')
 
 
 

@@ -1,4 +1,4 @@
-const arrays = require('./arrays.json')
+const arrays = require('./../arrays.json')
 
 exports.run = function (client, msg) {
     msg.react("✅")

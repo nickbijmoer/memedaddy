@@ -25,7 +25,7 @@ client.on("message", msg => {
       fs.readdirSync("./commands/").forEach(function (file) {
         arr.push(file.replace(".js", ""));
       });
-      msg.channel.sendMessage('**__Here are my commands, mmkay?__**\n${arr.join(", ")}\nTo see specific help or information about a command do \`pls help <command name>\`\n If you find any bugs or errors, please report it directly with the command: pls bug <message>');
+      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${arr.join("\n")}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\nIf you find any bugs or errors, please let Melmsie#7331 know and he will fix it promptly.`);
     }
   } else {
     fs.access("./commands/" + command + ".js", fs.constants.R_OK, (err) => {
