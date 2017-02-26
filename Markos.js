@@ -39,6 +39,21 @@ client.on("message", msg => {
       };
     });
   };
+
+  if (command === "eval") {
+    if (msg.author.id === config.owner) {
+      try {
+        let dank = eval(args.join(" "));
+        msg.channel.sendMessage('**Result:**\`\`\`js\n ' + dank + '\n\`\`\`')
+      } catch (e) {
+        msg.channel.sendMessage(":warning: **ERROR** :warning: \`\`\`\n" + e + "\n\`\`\`")
+      }
+
+    } else {
+      msg.reply('You\'ve been caught! Nice try!')
+      client.users.get(config.owner).sendMessage("**" + msg.author.username + '#' + msg.author.discriminator + " (" + msg.author.id + ")" + ":**\n" + "This person was trying to use the eval command!\n" + args.join(" "));
+    }
+  }
 })
 
 
