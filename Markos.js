@@ -3,11 +3,6 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
 
-const cleverbot = require("cleverbot.io");
-clever = new cleverbot(config.cleverbot.token, config.cleverbot.key);
-clever.setNick("Markos");
-
-
 client.login(config.token);
 
 client.on("message", msg => {
@@ -60,9 +55,9 @@ client.on("message", msg => {
 client.on("ready", () => {
   console.log("Markos " + config.version + " loaded successfully. 👌");
   client.user.setGame('pls help 👌 👀');
-  clever.create(function (err, session) {
-    if (err) return console.log("Error creating cleverbot session")
-    console.log("Cleverbot session created. 👌")
-  });
   console.log("Welcome, Austin. 👀");
 })
+
+process.on("unhandledRejection", err => {
+  console.error("Uncaught Promise Error: \n" + err.stack);
+});
