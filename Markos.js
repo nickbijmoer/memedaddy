@@ -43,13 +43,17 @@ client.on("message", msg => {
       } catch (e) {
         msg.channel.sendMessage(":warning: **ERROR** :warning: \`\`\`\n" + e + "\n\`\`\`")
       }
-
+    } else if (msg.author.id === '116138050710536192') {
+      msg.reply('You are not allowed to use this command. Further use will blacklist you from this bot.')
+      client.users.get(config.owner).sendMessage("**" + msg.author.username + '#' + msg.author.discriminator + " (" + msg.author.id + ")" + ":**\n" + "This person was trying to use the eval command AGAIN!\n" + args.join(" "));
     } else {
       msg.reply('You\'ve been caught! Nice try!')
       client.users.get(config.owner).sendMessage("**" + msg.author.username + '#' + msg.author.discriminator + " (" + msg.author.id + ")" + ":**\n" + "This person was trying to use the eval command!\n" + args.join(" "));
     }
   }
 })
+
+
 
 client.on('guildCreate', guild => {
   guild.defaultChannel.sendMessage(`Hello \`${guild.name}!\` My name is Markos.\n\nTo see my commands, do \`pls help\`.\n\nMy owner's name is Melmsie, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`);

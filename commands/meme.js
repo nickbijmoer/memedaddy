@@ -6,7 +6,7 @@ exports.run = function (client, msg, args, config) {
             if (!result.body.data.error) {
                 msg.channel.sendMessage(result.body.data[Math.floor((Math.random() * 20) + 1)].link)
             } else {
-                Logger.error(result.body.data.error)
+                msg.channel.sendMessage('There was an error with this command. Please report it to Melmsie.')
             }
         })
 }
