@@ -51,6 +51,14 @@ client.on("message", msg => {
   }
 })
 
+client.on('guildCreate', guild => {
+  guild.defaultChannel.sendMessage(`Hello \`${guild.name}!\` My name is Markos.\n\nTo see my commands, do \`pls help\`.\n\nMy owner's name is Melmsie, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`);
+  client.users.get(config.owner).sendMessage(`Markos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Member Count:__** ${guild.memberCount}`)
+});
+
+client.on('guildDelete', guild => {
+  client.users.get(config.owner).sendMessage(`Markos has left a guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Member Count:__** ${guild.memberCount}`)
+});
 
 client.on("ready", () => {
   console.log("Markos " + config.version + " loaded successfully. 👌");

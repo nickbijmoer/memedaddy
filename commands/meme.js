@@ -1,4 +1,4 @@
-exports.run = function (client, msg) {
+exports.run = function (client, msg, args, config) {
     const unirest = require('unirest')
     unirest.get(`https://api.imgur.com/3/g/memes/viral/${Math.floor((Math.random() * 8) + 1)}`) // 20 Memes per page, 160 Memes
         .header('Authorization', 'Client-ID ' + config.imgur)
