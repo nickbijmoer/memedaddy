@@ -31,7 +31,11 @@ client.on('message', msg => {
       msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${commands}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\n\nIf you find any bugs or errors, please do \`pls bug <bug report>\``)
     }
   } else if (command === 'eval') {
-    const { username, discriminator, id } = msg.author
+    const {
+      username,
+      discriminator,
+      id
+    } = msg.author
     const owner = client.users.get(config.owner)
     const script = args.join(' ')
 
@@ -39,7 +43,7 @@ client.on('message', msg => {
       try {
         const dank = eval(script) // eslint-disable-line no-eval
 
-        msg.channel.sendMessage('**Result:**```js\n ' + dank + '\n```')
+        msg.channel.sendCode('js', dank)
       } catch (e) {
         msg.channel.sendMessage(':warning: **ERROR** :warning: ```\n' + e + '\n```')
       }
@@ -48,6 +52,10 @@ client.on('message', msg => {
 
       owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
     }
+  } else if (command === 'say') {
+    const say = args.join(' ')
+      msg.delete();
+      msg.channel.sendMessage(say)
   } else {
     fs.access(path.join(commandsPath, command + '.js'), fs.constants.R_OK, (err) => {
       if (err) {
