@@ -1,6 +1,13 @@
 exports.run = function (client, msg) {
-    voiceChannel.join().then(connection => {
-        // you can play a file or a stream here:
-        const dispatcher = connection.playFile('./assets/sounds/test/lucio.mp3');
-    });
+    const voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel) {
+        return message.reply(`Please be in a voice channel first!`);
+    }
+    voiceChannel.join()
+        .then(connnection => {
+            const dispatcher = connection.playFile('./assets/sounds/test/lucio.mp3');
+            dispatcher.on('end', () => {
+                voiceChannel.leave();
+            });
+        });
 }
