@@ -1,8 +1,5 @@
-const arrays = require('../assets/arrays.json')
-const { randomInArray } = require('../utils')
-
+const arrays = require('./../arrays.json')
 exports.run = function (client, msg) {
-  msg.channel.sendMessage(randomInArray(arrays.pun))
+        msg.channel.sendMessage(arrays.pun[Math.floor(Math.random() * arrays.pun.length)])
 }
-
-exports.help = '**Usage: `pls pun`**\nWill return a random pun.'
+exports.help = "**Usage: \`pls pun\`**\nWill return a random pun."
