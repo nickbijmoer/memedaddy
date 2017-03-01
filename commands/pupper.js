@@ -1,17 +1,22 @@
-const rp = require('request-promise');
-const arrays = require('./../arrays.json');
-exports.run = function (client, msg) {
-    msg.channel.sendMessage(arrays.pup[Math.floor(Math.random() * arrays.pup.length)]).then(mesg => {
-        setTimeout(() => {
-            rp("http://random.dog/woof").then(data => {
-                msg.channel.sendFile(`http://random.dog/${data}`);
-            });
-            mesg.delete();
-        }, 2500)
-        if (err) {
-            msg.channel.sendMessage('The pupper ran away :(')
-        }
-    });
-};
+const axios = require('axios')
 
-exports.help = "**Usage: \`pls pupper\`**\nSee the cutest thing since sliced bread AKA a pupper."
+const { randomInArray, delayPromise } = require('../utils')
+const arrays = require('../assets/arrays.json')
+
+exports.run = function (client, { channel }) {
+  channel.sendMessage(randomInArray(arrays.pup))
+    .then(delayPromise(2500))
+    .then(msg => {
+      msg.delete()
+
+      return axios('http://random.dog/woof')
+    })
+    .then(({ data }) => channel.sendFile(`http://random.dog/${data}`))
+    .catch(err => {
+      console.error(err)
+
+      channel.sendMessage('The pupper ran away :(')
+    })
+}
+
+exports.help = '**Usage: `pls pupper`**\nSee the cutest thing since sliced bread AKA a pupper.'
