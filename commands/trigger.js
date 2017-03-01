@@ -3,45 +3,53 @@ const path = require('path')
 
 const assetsPath = path.join(__dirname, '../assets/')
 
-exports.run = function (client, { channel, mentions }, args) {
-  if (mentions.users.size !== 1) {
-    return channel.sendMessage('You must mention **one** user!')
+exports.run = async function (client, msg, args) {
+  if (msg.mentions.users.size !== 1) {
+    return msg.reply('you must mention **one** user!')
   }
 
-  const firstMention = mentions.users.first()
+  const firstMention = msg.mentions.users.first()
 
-  channel.sendMessage(':gear: Generating... please wait.')
-    .then(msg => {
-      Promise.all([
-        Jimp.read(firstMention.displayAvatarURL),
-        Jimp.read(path.join(assetsPath, 'triggered.jpg')),
-        Jimp.read(path.join(assetsPath, 'red.png'))
-      ])
-        .then(([ avatar, triggered, red ]) => {
-          red.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
-          triggered.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
+  const notice = await msg.channel.sendMessage(':gear: Generating... please wait.')
+  const fail = () => notice.edit(':warning: Failed to generate image')
 
-          red.opacity(0.2)
+  let avatar, triggered, red
 
-          avatar.composite(red, 0, 0)
-                .composite(triggered, 0, avatar.bitmap.height - triggered.bitmap.height)
+  try {
+    [ avatar, triggered, red ] = await Promise.all([
+      Jimp.read(firstMention.displayAvatarURL),
+      Jimp.read(path.join(assetsPath, 'triggered.jpg')),
+      Jimp.read(path.join(assetsPath, 'red.png'))
+    ])
+  } catch (err) {
+    console.error(err)
 
-          avatar.getBuffer(Jimp.MIME_PNG, (err, image) => {
-            msg.delete()
+    return fail()
+  }
 
-            if (err) {
-              throw new Error(err)
-            }
+  red.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
+  triggered.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
 
-            channel.sendFile(image, 't r i g g e r.png', `${firstMention.username} is **triggered**`)
-          })
-        })
-        .catch(err => {
-          console.error(err)
+  red.opacity(0.2)
 
-          msg.edit(':warning: Failed to generate image')
-        })
-    })
+  avatar.composite(red, 0, 0)
+        .composite(triggered, 0, avatar.bitmap.height - triggered.bitmap.height)
+
+  avatar.getBuffer(Jimp.MIME_PNG, async (err, image) => {
+    if (err) {
+      console.error(new Error(err))
+
+      return fail()
+    }
+
+    notice.delete()
+
+    msg.channel.sendFile(
+      image,
+      't r i g g e r.png',
+      `**${firstMention.username} is triggered**`
+    )
+  })
 }
 
 exports.help = '**Usage: `pls trigger`**\nMakes the tagged user angry. *Does not work with gifs*'

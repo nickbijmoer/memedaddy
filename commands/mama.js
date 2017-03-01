@@ -1,13 +1,15 @@
 const axios = require('axios')
 
-exports.run = function (client, { channel }) {
-  axios('http://api.yomomma.info/')
-    .then(({ data }) => channel.sendMessage(data.joke))
-    .catch(err => {
-      console.error(err)
+exports.run = async function (client, msg) {
+  try {
+    const { data: { joke } } = await axios('http://api.yomomma.info/')
 
-      channel.sendMessage('The API done broke itself')
-    })
+    msg.reply(joke)
+  } catch (err) {
+    console.error(err)
+
+    msg.reply('the API done broke itself')
+  }
 }
 
 exports.help = '**Usage: `pls mama`**\nYo mama uses this command SO MUCH...'

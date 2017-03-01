@@ -1,24 +1,24 @@
 const axios = require('axios')
 
-const { delayPromise, randomInArray } = require('../utils')
+const { randomInArray } = require('../utils')
 const arrays = require('../assets/arrays.json')
 
-exports.run = function (client, msg) {
-  const randomCat = randomInArray(arrays.cat)
+exports.run = async function (client, msg) {
+  const notice = await msg.channel.sendMessage(randomInArray(arrays.cat))
 
-  msg.channel.sendMessage(randomCat)
-    .then(delayPromise(2500))
-    .then(msg => {
-      msg.delete()
+  setTimeout(async () => {
+    notice.delete()
 
-      return axios('http://random.cat/meow')
-    })
-    .then(({ data }) => msg.channel.sendFile(data.file))
-    .catch(err => {
+    try {
+      const { data: { file } } = await axios('http://random.cat/meow')
+
+      msg.channel.sendFile(file)
+    } catch (err) {
       console.error(err)
 
       msg.reply('oh no, the kitty ran away!')
-    })
+    }
+  }, 2500)
 }
 
 exports.help = '**Usage: `pls kitty`**\nAll da kitteh pics'

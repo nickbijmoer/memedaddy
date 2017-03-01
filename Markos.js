@@ -1,55 +1,67 @@
 const config = require('./config.json')
 const Discord = require('discord.js')
 const fs = require('fs')
+const path = require('path')
 const client = new Discord.Client()
 
 client.login(config.token)
 
-client.on('message', msg => {
-  if (msg.author.bot) return false
-  if (!msg.content.startsWith(config.prefix)) return false
+const commandsPath = path.join(__dirname, './commands')
 
-  let command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
-  let args = msg.content.split(' ').slice(2)
+client.on('message', msg => {
+  if (msg.author.bot || !msg.content.startsWith(config.prefix)) {
+    return
+  }
+
+  const command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
+  const args = msg.content.split(' ').slice(2)
 
   if (command === 'help') {
     if (args[0]) {
-      msg.channel.sendMessage(require(`./commands/${args[0]}`).help)
-    } else {
-      let arr = []
-      fs.readdirSync('./commands/').forEach(function (file) {
-        arr.push(file.replace('.js', ''))
-      })
-      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${arr.join('\n')}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\n\nIf you find any bugs or errors, please do \`pls bug <bug report>\``)
-    }
-  } else {
-    fs.access('./commands/' + command + '.js', fs.constants.R_OK, (err) => {
-      if (err) return false
       try {
-        delete require.cache[require.resolve('./commands/' + command)]
-        let comm = require('./commands/' + command)
-        comm.run(client, msg, args, config, Discord)
+        msg.channel.sendMessage(require(`./commands/${args[0]}`).help)
       } catch (err) {
-        console.error(err)
-      };
-    })
-  };
+        msg.channel.sendMessage(`\`${args[0]}\` is not a valid command`)
+      }
+    } else {
+      const commands = fs.readdirSync(commandsPath)
+        .map(file => file.replace('.js', ''))
+        .join('\n')
 
-  if (command === 'eval') {
+      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${commands}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\n\nIf you find any bugs or errors, please do \`pls bug <bug report>\``)
+    }
+  } else if (command === 'eval') {
+    const { username, discriminator, id } = msg.author
+    const owner = client.users.get(config.owner)
+    const script = args.join(' ')
+
     if (msg.author.id === config.owner) {
       try {
-        let dank = eval(args.join(' ')) // eslint-disable-line no-eval
+        const dank = eval(script) // eslint-disable-line no-eval
+
         msg.channel.sendMessage('**Result:**```js\n ' + dank + '\n```')
       } catch (e) {
         msg.channel.sendMessage(':warning: **ERROR** :warning: ```\n' + e + '\n```')
       }
-    } else if (msg.author.id === '116138050710536192') {
-      msg.reply('you are not allowed to use this command. Further use will blacklist you from this bot.')
-      client.users.get(config.owner).sendMessage('**' + msg.author.username + '#' + msg.author.discriminator + ' (' + msg.author.id + ')' + ':**\n' + 'This person was trying to use the eval command AGAIN!\n' + args.join(' '))
     } else {
       msg.reply('you\'ve been caught! Nice try!')
-      client.users.get(config.owner).sendMessage('**' + msg.author.username + '#' + msg.author.discriminator + ' (' + msg.author.id + ')' + ':**\n' + 'This person was trying to use the eval command!\n' + args.join(' '))
+
+      owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
     }
+  } else {
+    fs.access(path.join(commandsPath, command + '.js'), fs.constants.R_OK, (err) => {
+      if (err) {
+        return
+      }
+
+      try {
+        delete require.cache[require.resolve('./commands/' + command)]
+
+        require('./commands/' + command).run(client, msg, args, config, Discord)
+      } catch (err) {
+        console.error(err)
+      }
+    })
   }
 })
 

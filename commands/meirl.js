@@ -15,7 +15,7 @@ function fixURL (uri) {
   return uri
 }
 
-exports.run = function (client, msg, args, config, Discord) {
+exports.run = async function (client, msg, args, config, Discord) {
   const req = axios('http://reddit.com/r/me_irl/new.json', {
     params: {
       sort: 'default',
@@ -23,28 +23,21 @@ exports.run = function (client, msg, args, config, Discord) {
     }
   })
 
-  Promise.all([msg.channel.sendMessage('Your post is on its way!'), req])
-    .then(([msg, req]) => {
-      msg.delete()
+  const [ notice, res ] = await Promise.all([msg.channel.sendMessage('Your post is on its way!'), req])
 
-      const post = randomInArray(req.data.data.children).data
-      const fixedUrl = fixURL(post.url)
+  const post = randomInArray(res.data.data.children).data
+  const fixedUrl = fixURL(post.url)
 
-      const embed = new Discord.RichEmbed()
-        .setColor('#3676b3')
-        .setTitle(post.title)
-        .setAuthor(`/u/${post.author}`)
-        .setFooter('Powered by /r/me_irl')
-        .setImage(fixedUrl)
-        .setURL(fixedUrl)
+  const embed = new Discord.RichEmbed()
+    .setColor('#3676b3')
+    .setTitle(post.title)
+    .setAuthor(`/u/${post.author}`)
+    .setFooter('Powered by /r/me_irl')
+    .setImage(fixedUrl)
+    .setURL(fixedUrl)
 
-      msg.channel.sendEmbed(embed, { disableEveryone: true })
-    })
-    .catch(err => {
-      console.error(err)
-
-      msg.reply('sorry but something went wrong...')
-    })
+  notice.delete()
+  msg.channel.sendEmbed(embed, { disableEveryone: true })
 }
 
 exports.help = '**Usage: `pls me_irl`**\nReturns a random image from the subreddit me_irl'

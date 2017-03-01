@@ -1,11 +1,22 @@
 exports.run = function (client, msg, args) {
-  const nicknames = msg.mentions.users.array()
-    .map(m => m.username)
-    .join(' and ')
+  const targets = [ ]
 
-  const query = encodeURI(nicknames)
+  msg.mentions.users.array()
+    .forEach(m => {
+      targets.push(m.username)
+
+      const idAsInContent = `<@!${m.id}>`
+
+      if (args.includes(idAsInContent)) {
+        args.splice(args.indexOf(idAsInContent), 1)
+      }
+    })
+
+  args.forEach(m => targets.push(m))
+
+  const query = encodeURI(targets.join(' and '))
 
   msg.channel.sendMessage(`<http://ripme.xyz/${query}>`)
 }
 
-exports.help = '**Usage: `pls rip <user>` (Do not tag the user, just type their name.**\nInstead of just typing rip when someone gets rekt, use this!'
+exports.help = '**Usage: `pls rip <user>`**\nInstead of just typing rip when someone gets rekt, use this!'
