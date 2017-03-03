@@ -12,6 +12,9 @@ client.on('message', msg => {
   if (msg.author.bot || !msg.content.startsWith(config.prefix)) {
     return
   }
+  if (msg.author.id === "287253503007784960") {
+    return
+  }
 
   const command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
   const args = msg.content.split(' ').slice(2)
@@ -54,8 +57,8 @@ client.on('message', msg => {
     }
   } else if (command === 'say') {
     const say = args.join(' ')
-      msg.delete();
-      msg.channel.sendMessage(say)
+    msg.delete();
+    msg.channel.sendMessage(say)
   } else {
     fs.access(path.join(commandsPath, command + '.js'), fs.constants.R_OK, (err) => {
       if (err) {
@@ -74,8 +77,13 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-  guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Markos.\n\nTo see my commands, do \`pls help\`.\n\nMy owner's name is Melmsie, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
-  client.users.get(config.owner).sendMessage(`Markos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Member Count:__** ${guild.memberCount}`)
+  if (guild.id === '189772489243623426') {
+    guild.defaultChannel.sendMessage('Yeah, no.')
+    client.guilds.get('189772489243623426').leave()
+  } else {
+    guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Markos.\n\nTo see my commands, do \`pls help\`.\n\nMy owner's name is Melmsie, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
+    client.users.get(config.owner).sendMessage(`Markos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Member Count:__** ${guild.memberCount}`)
+  }
 })
 
 client.on('guildDelete', guild => {
