@@ -104,7 +104,7 @@ client.on('guildDelete', guild => {
 client.on('ready', () => {
   console.log('Markos ' + config.version + ' loaded successfully. 👌')
   client.user.setGame(config.prefix + 'help 👌 👀')
-  client.guilds.get('281482896265707520').fetchMember("284901153265680385").then((guildMember) => guildMember.setNickname('MemeDaddy Markos')).catch(console.error);
+ // client.guilds.get('281482896265707520').fetchMember("284901153265680385").then((guildMember) => guildMember.setNickname('MemeDaddy Markos')).catch(console.error);
   console.log('Welcome, Austin. 👀')
 })
 
