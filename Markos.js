@@ -12,7 +12,7 @@ client.on('message', msg => {
   if (msg.author.bot || !msg.content.startsWith(config.prefix)) {
     return
   }
-  if (msg.content.startsWith(config.prefix) && msg.author.id === !config.owner) {
+  if (msg.content.startsWith(config.prefix)) {
     const {
       username,
       discriminator,
