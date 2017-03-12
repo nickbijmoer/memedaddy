@@ -19,7 +19,7 @@ client.on('message', msg => {
       id
     } = msg.author
 
-    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`**${username}#${discriminator} (${id}):**\n` + msg.content)
+    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`**${username}#${discriminator} (ID: ${id})(Guild: ${msg.guild.name}):**\n` + msg.content)
   }
   if (msg.author.id === "287253503007784960") {
     return
