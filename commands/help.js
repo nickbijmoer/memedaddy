@@ -32,9 +32,11 @@ exports.run = function (client, msg, args, config, Discord) {
        
        "\nInfo/Tools\n" +
        "========\n" +
+       "ban <user> <reason> - Swing that hammer\n" +
        "bug <bug report|feature request> - requests a feature or reports a bug to the owner\n" +
        "help - ...?\n" +
        "info - returns some info about Markos and Melmsie\n" +
+       "kick <user> <reason> - kick his ass!\n" +
        "ping - pong!\n" +
        "stats - returns basic stats about Markos\n" +
        "support - an invite to Markos' support server\n" +

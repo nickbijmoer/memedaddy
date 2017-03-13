@@ -1,13 +1,13 @@
 exports.run = function (client, msg, args, config, Discord) {
     var gagScraper = require('9gag-scraper')
-    new gagScraper("trending").getGags(function (error, data) {
+    new gagScraper("trending").getRandom(function (error, data) {
 
         const embed = new Discord.RichEmbed()
             .setColor('#3676b3')
-            .setTitle(data.gags[0].title)
+            .setTitle(data.title)
             .setFooter('Powered by 9GAG')
-            .setImage(data.gags[0].image)
-            .setURL(data.gags[0].url)
+            .setImage(data.image)
+            .setURL(data.url)
 
 
         msg.channel.sendEmbed(embed, {
