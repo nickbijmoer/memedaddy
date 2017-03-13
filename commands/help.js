@@ -4,24 +4,31 @@ exports.run = function (client, msg, args, config, Discord) {
        
        "\nFun\n" +
        "========\n" +
+       "9gag - get a random trending image from 9GAG" +
+       "asktrump <question to ask president trump> - trump will give his opinion on your question" +
        "feelsbadman - returns a pepe\n" +
        "glorify <mention user> - replaces 'Chuck Norris' with the mentioned user in a Norris joke\n" +
        "insultme - insults you\n" +
+       "joke - Sends a random one-liner (can be nsfw)\n" +
        "kitty - Meow, a random kitten!\n" +
+       "knock - who's there?\n" +
        "leet <message> - translates your message to 1337 speak\n" +
        "lenny - lenny?\n" +
        "lmgtfy <google search> - when someone is too dumb to google something, use this for educational purposes\n" +
        "lul - lulface\n" +
        "mama - yo mama hates this command\n" +
        "meirl - returns a random post from /r/me_irl\n" +
+       "norris - returns a random chuck norris joke\n" +
        "pun - gotta love puns, right?\n" +
        "pupper - bark bark!\n" +
        "rip <TYPE user's name> - I can't explain this one. Do NOT mention someone.\n" +
        "shitpost - warning: shitpost\n" +
        "superscript <message> - translates your message to superscript\n" +
        "trigger <mention user> - will trigger someone" +
+       "urban <search term> - will return an urban dictionary definition" +
        "vaporwave <message> - translates the message into vaporwave\n" +
        "xkcd <query> - fetches an XKCD comic. Leave no query for a random comic.\n" +
+       "zalgo <message> - z̻͙͎̘̻̹̰͟a̭͎̥l̬̗͟g̛̠͎̹̗̠̮ͅo̯̭̣͎̺̰̠\n" +
        
        "\nInfo/Tools\n" +
        "========\n" +
@@ -43,7 +50,7 @@ exports.run = function (client, msg, args, config, Discord) {
        "\nComing Soon\n" +
        "========\n" +
        "ram - detailed report about RAM usage\n" +
-       "voice memes - not sure yet, maybe some shitposty music?\n" +
+       "a game?\n" +
        "meme generator - ez ez ez\n" 
 
        
