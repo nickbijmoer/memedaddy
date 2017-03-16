@@ -12,18 +12,8 @@ client.on('message', msg => {
   if (msg.author.bot || !msg.content.startsWith(config.prefix)) {
     return
   }
-  if (msg.content.startsWith(config.prefix)) {
-    const {
-      username,
-      discriminator,
-      id
-    } = msg.author
 
-    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`**${username}#${discriminator} (ID: ${id})(Guild: ${msg.guild.name}):**\n` + msg.content)
-  }
-  if (msg.author.id === "287253503007784960") {
-    return
-  }
+
 
   const command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
   const args = msg.content.split(' ').slice(2)
@@ -60,7 +50,7 @@ client.on('message', msg => {
         msg.channel.sendMessage(':warning: **ERROR** :warning: ```\n' + e + '\n```')
       }
     } else {
-      msg.reply('you\'ve been caught! Nice try!')
+      msg.reply('you don\'t have permission to use this command.')
 
       owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
     }
@@ -88,18 +78,16 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-    guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Markos.\n\nTo see my commands, do \`pls help\`.\n\nMy owner's name is Melmsie, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
-    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`Markos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Member Count:__** ${guild.memberCount}`)
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`\nMarkos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Guild Owner ID:__** ${guild.owner.user.id}\n\n**__Member Count:__** ${guild.memberCount}\n\`\`\``)
 })
 
 client.on('guildDelete', guild => {
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`Markos has left a guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Member Count:__** ${guild.memberCount}`)
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`\nMarkos has left a guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Guild Owner ID:__** ${guild.owner.user.id}\n\n**__Member Count:__** ${guild.memberCount}\n\`\`\``)
 })
 
 client.on('ready', () => {
   console.log('Markos ' + config.version + ' loaded successfully. 👌')
   client.user.setGame(config.prefix + 'help 👌 👀')
-  // client.guilds.get('281482896265707520').fetchMember("284901153265680385").then((guildMember) => guildMember.setNickname('MemeDaddy Markos')).catch(console.error);
   console.log('Welcome, Austin. 👀')
 })
 
