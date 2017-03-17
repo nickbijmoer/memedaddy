@@ -5,4 +5,3 @@ exports.run = function (client, msg, command) {
 /* eslint-enable no-irregular-whitespace */
 }
 
-exports.help = '**Usage: `pls invite`**\nMarkos will DM you a link to invite him to a server you own/have perms to'

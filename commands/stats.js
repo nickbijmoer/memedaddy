@@ -6,7 +6,7 @@ exports.run = function (client, msg, args, config, Discord) {
 
   const embed = new Discord.RichEmbed()
     .setColor('#7d5bbe')
-    .setTitle(`Markos || ${config.version}`)
+    .setTitle(`MemeDaddy || ${config.version}`)
     .addField('__Uptime__', uptime, true)
     .addField('__RAM Usage__', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
     .addField('__Websocket Ping__', `${(client.ping).toFixed(0)} ms`, true)

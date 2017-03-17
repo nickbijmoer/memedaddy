@@ -8,5 +8,3 @@ exports.run = async function (client, msg, args, config) {
     msg.channel.sendMessage("tfw you don't have permission to use this command :fire:")
   }
 }
-
-exports.help = '**Usage: `pls reboot`**\n[Melmsie Only] Will restart Markos.'

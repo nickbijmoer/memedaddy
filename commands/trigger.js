@@ -52,4 +52,3 @@ exports.run = async function (client, msg, args) {
   })
 }
 
-exports.help = '**Usage: `pls trigger`**\nMakes the tagged user angry. *Does not work with gifs*'

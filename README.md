@@ -1,6 +1,4 @@
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
-
-# Markos
+# MemeDaddy
 A sassy meme bot, made for discord. 
 
 
@@ -11,6 +9,8 @@ Memes you didn't even ask for
 Voice chat memes
 
 Reaction memes
+
+MemeGen
 
 
 

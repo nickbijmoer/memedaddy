@@ -23,6 +23,7 @@ exports.run = function (client, msg, args, config, Discord) {
         "pun - gotta love puns, right?\n" +
         "pupper - bark bark!\n" +
         "rip <TYPE user's name> - I can't explain this one. Do NOT mention someone.\n" +
+        "say - make MemeDaddy say dumb stuff\n" +
         "shitpost - warning: shitpost\n" +
         "superscript <message> - translates your message to superscript\n" +
         "trigger <mention user> - will trigger someone" +
@@ -36,19 +37,18 @@ exports.run = function (client, msg, args, config, Discord) {
         "ban <user> <reason> - Swing that hammer\n" +
         "bug <bug report|feature request> - requests a feature or reports a bug to the owner\n" +
         "help - ...?\n" +
-        "info - returns some info about Markos and Melmsie\n" +
+        "info - returns some info about MemeDaddy and Melmsie\n" +
         "kick <user> <reason> - kick his ass!\n" +
         "ping - pong!\n" +
-        "stats - returns basic stats about Markos\n" +
+        "stats - returns basic stats about MemeDaddy\n" +
         "support - an invite to Markos' support server\n" +
-        "uptime - returns the uptime of Markos\n" +
+        "uptime - returns the uptime of MemeDaddy\n" +
 
         "\nMelmsie Only\n" +
         "========\n" +
-        "ban <user|guild> - bans a user|guild from using Markos\n" +
+        "ban <user|guild> - bans a user|guild from using MemeDaddy\n" +
         "eval <js expression> - runs some js\n" +
-        "reboot - reboots Markos\n" +
-        "say - make Markos say dumb stuff\n" +
+        "reboot - reboots MemeDaddy\n" +
 
         "\nComing Soon\n" +
         "========\n" +

@@ -52,4 +52,3 @@ exports.run = async function (client, msg, args, config, Discord) {
   }
 }
 
-exports.help = '**Usage: `pls xkcd <comic title>`**\nWill return a comic from xkcd.'

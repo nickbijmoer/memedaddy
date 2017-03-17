@@ -6,4 +6,3 @@ exports.run = function (client, msg, args, config) {
   }
 }
 
-exports.help = '**Usage: `pls servers`**\n[Owner Only] Display the servers Markos is in.**'
