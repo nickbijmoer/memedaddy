@@ -20,5 +20,3 @@ exports.run = async function (client, msg) {
     }
   }, 2500)
 }
-
-exports.help = '**Usage: `pls pupper`**\nSee the cutest thing since sliced bread AKA a pupper.'

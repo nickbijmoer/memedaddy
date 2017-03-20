@@ -13,26 +13,11 @@ client.on('message', msg => {
     return
   }
 
-
-
   const command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
   const args = msg.content.split(' ').slice(2)
 
-  if (command === 'gonna get to this later, ignore this') {
-    if (args[0]) {
-      try {
-        msg.channel.sendMessage(require(`./commands/${args[0]}`).help)
-      } catch (err) {
-        msg.channel.sendMessage(`\`${args[0]}\` is not a valid command`)
-      }
-    } else {
-      const commands = fs.readdirSync(commandsPath)
-        .map(file => file.replace('.js', ''))
-        .join('\n')
-
-      msg.channel.sendMessage(`**__Here are my commands, mmkay?__**\n \n\`${commands}\`\n \nTo see specific help or information about a command do \`pls help <command name>\`\n\nIf you find any bugs or errors, please do \`pls bug <bug report>\``)
-    }
-  } else if (command === 'eval') {
+  if (command === 'eval') {
+    i
     const {
       username,
       discriminator,
@@ -54,12 +39,7 @@ client.on('message', msg => {
 
       owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
     }
-  } else if (command === 'say') {
-    if (msg.author.id === config.owner) {
-      const say = args.join(' ')
-      msg.delete();
-      msg.channel.sendMessage(say)
-    }
+
   } else {
     fs.access(path.join(commandsPath, command + '.js'), fs.constants.R_OK, (err) => {
       if (err) {
@@ -78,11 +58,11 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`\nMarkos has joined a new guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Guild Owner ID:__** ${guild.owner.user.id}\n\n**__Member Count:__** ${guild.memberCount}\n\`\`\``)
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`adoc\nMemeDaddy has joined a new guild.\n\nGuild Name: ${guild.name}\n\nGuild ID: ${guild.id}\n\nGuild Owner: ${guild.owner.user.username}\n\nGuild Owner ID: ${guild.owner.user.id}\n\nMember Count: ${guild.memberCount}\n\`\`\``)
 })
 
 client.on('guildDelete', guild => {
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`\nMarkos has left a guild.\n\n**__Guild Name:__** ${guild.name}\n\n**__Guild ID:__** ${guild.id}\n\n**__Guild Owner:__** ${guild.owner.user.username}\n\n**__Guild Owner ID:__** ${guild.owner.user.id}\n\n**__Member Count:__** ${guild.memberCount}\n\`\`\``)
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`adoc\nMemeDaddy has left a guild.\n\nGuild Name: ${guild.name}\n\nGuild ID: ${guild.id}\n\nGuild Owner: ${guild.owner.user.username}\n\nGuild Owner ID: ${guild.owner.user.id}\n\nMember Count: ${guild.memberCount}\n\`\`\``)
 })
 
 client.on('ready', () => {

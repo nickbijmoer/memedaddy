@@ -5,5 +5,3 @@ exports.run = function (client, msg, args) {
 
   msg.reply(`**${text}**`)
 }
-
-exports.help = '**Usage: `pls vaporwave <message to vaporwave>`**\nｉｔ ｄｏｅｓ ｔｈｉｓ'

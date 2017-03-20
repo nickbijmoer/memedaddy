@@ -5,13 +5,7 @@ const shitpostReactions = [
   '🇩',
   '🇦',
   '🇳',
-  '🇰',
-  '🔥',
-  '💯',
-  '👌',
-  '👀',
-  '💩',
-  '🍆'
+  '🇰'
 ]
 
 exports.run = async function (client, msg) {
@@ -23,5 +17,3 @@ exports.run = async function (client, msg) {
     await shitpost.react(reaction)
   }
 }
-
-exports.help = '**Usage: `pls shitpost`**\n👌👀👌👀👌👀👌👀👌👀 good shit go౦ԁ sHit👌 thats ✔ some good👌👌shit right👌👌there👌👌👌 right✔there ✔✔if i do ƽaү so my self 💯 i say so 💯 thats what im talking about right there right there (chorus: ʳᶦᵍʰᵗ ᵗʰᵉʳᵉ) mMMMMᎷМ💯 👌👌 👌НO0ОଠOOOOOОଠଠOoooᵒᵒᵒᵒᵒᵒᵒᵒᵒ👌 👌👌 👌 💯 👌 👀 👀 👀 👌👌Good shit'

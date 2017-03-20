@@ -5,4 +5,3 @@ exports.run = function (client, msg, args, config) {
     msg.reply('you don\'t have permission to use this command, noob.')
   }
 }
-

@@ -9,5 +9,3 @@ exports.run = function (client, msg, args) {
     msg.reply('please enter some text!')
   }
 }
-
-exports.help = '**Usage: `pls superscript <message to superscript>`**\nᶦᵗ ᵈᵒᵉˢ ᵗʰᶦˢ'

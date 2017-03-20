@@ -19,5 +19,3 @@ exports.run = function (client, msg, args, config, Discord) {
 
   msg.channel.sendEmbed(embed, { disableEveryone: true })
 }
-
-exports.help = '**Usage: `pls stats`**\nReturns some useful stats about Markos.'

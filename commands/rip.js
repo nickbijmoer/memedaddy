@@ -18,5 +18,3 @@ exports.run = function (client, msg, args) {
 
   msg.channel.sendMessage(`<http://ripme.xyz/${query}>`)
 }
-
-exports.help = '**Usage: `pls rip <user>`**\nInstead of just typing rip when someone gets rekt, use this!'

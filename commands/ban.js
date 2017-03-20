@@ -1,4 +1,4 @@
-exports.run = function (client, msg, args, config, Discord) {
+exports.run = function (client, msg, args) {
     let reason = args.slice(1).join(' ');
     let user = msg.mentions.users.first();
     let member = msg.guild.member(user);

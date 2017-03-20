@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-exports.run = async function (client, msg, args) {
+exports.run = async function (client, msg) {
   try {
     const { data } = await axios('http://quandyfactory.com/insult/json')
 

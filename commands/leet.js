@@ -8,5 +8,3 @@ exports.run = function (client, msg, args) {
     msg.reply(leet(args.join(' ')))
   }
 }
-
-exports.help = '**Usage: `pls leet <message to leet>`**\nThis turns your text into 1337 5p34k'
