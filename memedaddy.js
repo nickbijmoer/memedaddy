@@ -57,16 +57,16 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-
+client.user.setGame('in ' + client.guilds.size + ' guilds')
   client.guilds.get(guild.id).fetchMembers()
     .then(x => {
       let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
       const embed = new Discord.RichEmbed()
         .setAuthor('MemeDaddy has joined ' + guild.name)
         .setColor('#2D7FFF')
-        .setImage(guild.iconURL)
-        .setDescription(guild.id)
-        .addField('Guild Owner', guild.owner.user.username + guild.owner.user.discriminator + `\n(${guild.owner.user.id})`)
+        .setThumbnail(guild.iconURL)
+        .setDescription(`(${guild.id})`)
+        .addField('Guild Owner', guild.owner.user.username + '#' + guild.owner.user.discriminator + `\n(${guild.owner.user.id})`)
         .addField('Bots/Members', `${c}/${guild.memberCount}`)
         .addField('Guild Region', guild.region)
         .addField('Creation Date', guild.createdAt.toString(), true)
