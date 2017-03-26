@@ -17,6 +17,7 @@ client.on('message', msg => {
   const args = msg.content.split(' ').slice(2)
 
   if (command === 'eval') {
+    i
     const {
       username,
       discriminator,
