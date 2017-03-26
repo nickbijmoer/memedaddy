@@ -12,10 +12,8 @@ exports.run = function (client, msg, args, config, Discord) {
     .addField('__Websocket Ping__', `${(client.ping).toFixed(0)} ms`, true)
     .addField('__Node__', `${process.version}`, true)
     .addField('__Library__', `[Discord.js](https://discord.js.org) v${Discord.version}`, true)
-    .addField('__System Info__', `${process.platform} (${process.arch})`, true)
     .addField('__Joined Guilds__', client.guilds.size, true)
-    .addField('__Newest Guild__', client.guilds.last().name, true)
-    .addField('__Owner Height__', '6\'2"', true)
+
 
   msg.channel.sendEmbed(embed, { disableEveryone: true })
 }

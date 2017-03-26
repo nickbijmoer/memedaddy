@@ -57,16 +57,44 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`adoc\nMemeDaddy has joined a new guild.\n\nGuild Name: ${guild.name}\n\nGuild ID: ${guild.id}\n\nGuild Owner: ${guild.owner.user.username}\n\nGuild Owner ID: ${guild.owner.user.id}\n\nMember Count: ${guild.memberCount}\n\`\`\``)
+
+  client.guilds.get(guild.id).fetchMembers()
+    .then(x => {
+      let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
+      const embed = new Discord.RichEmbed()
+        .setAuthor('MemeDaddy has joined ' + guild.name)
+        .setColor('#2D7FFF')
+        .setImage(guild.iconURL)
+        .setDescription(guild.id)
+        .addField('Guild Owner', guild.owner.user.username + guild.owner.user.discriminator + `\n(${guild.owner.user.id})`)
+        .addField('Bots/Members', `${c}/${guild.memberCount}`)
+        .addField('Guild Region', guild.region)
+        .addField('Creation Date', guild.createdAt.toString(), true)
+        .addField('Emojis', guild.emojis.size > 0 ? guild.emojis.map(d => d.toString()).join(' ') : 'None')
+        .addField('Roles', guild.roles.size > 0 ? guild.roles.map(d => d.toString()).join(' ') : 'None')
+
+      client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
+        disableEveryone: true
+      });
+    })
 })
 
 client.on('guildDelete', guild => {
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`\`\`\`adoc\nMemeDaddy has left a guild.\n\nGuild Name: ${guild.name}\n\nGuild ID: ${guild.id}\n\nGuild Owner: ${guild.owner.user.username}\n\nGuild Owner ID: ${guild.owner.user.id}\n\nMember Count: ${guild.memberCount}\n\`\`\``)
+
+  const embed = new Discord.RichEmbed()
+
+    .setAuthor('MemeDaddy has left ' + guild.name)
+    .setColor('#ff6161')
+
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
+    disableEveryone: true
+  })
 })
 
+
 client.on('ready', () => {
-  console.log('Markos ' + config.version + ' loaded successfully. 👌')
-  client.user.setGame(config.prefix + 'help | formerly Markos')
+  console.log('MemeDaddy ' + config.version + ' loaded successfully. 👌')
+  client.user.setGame(client.guilds.size + ' in guilds')
   console.log('Welcome, Austin. 👀')
 })
 

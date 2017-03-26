@@ -2,7 +2,7 @@ exports.run = function (client, msg, args, config, Discord) {
   const embed = new Discord.RichEmbed()
     .setTitle('Melmsie\'s Server')
     .setAuthor('About MemeDaddy and Melmsie')
-    .setColor('#3676b3')
+    .setColor('#2D7FFF')
     .setDescription('Dat meme bot doe')
     .setFooter('Need to see my commands? Do pls help')
     .setURL('https://discord.gg/3GNMJBG')
