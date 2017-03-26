@@ -85,6 +85,12 @@ client.on('guildDelete', guild => {
 client.on('ready', () => {
   console.log('MemeDaddy ' + config.version + ' loaded successfully. 👌')
   client.user.setGame('in ' + client.guilds.size + ' guilds')
+  const embed = new Discord.RichEmbed()
+    .setAuthor('MemeDaddy has been rebooted.')
+    .setColor('#00d322')
+  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
+    disableEveryone: true
+  });
 })
 
 process.on('unhandledRejection', err => {
