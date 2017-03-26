@@ -94,7 +94,7 @@ client.on('guildDelete', guild => {
 
 client.on('ready', () => {
   console.log('MemeDaddy ' + config.version + ' loaded successfully. 👌')
-  client.user.setGame(client.guilds.size + ' in guilds')
+  client.user.setGame('in ' + client.guilds.size + ' guilds')
   console.log('Welcome, Austin. 👀')
 })
 
