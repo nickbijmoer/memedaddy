@@ -1,12 +1,12 @@
 exports.run = function (client, msg, args, config, Discord) {
   if (msg.author.id === config.owner) {
-    var servers = client.guilds.array()
+   
     var request = require('request')
     const rp = require('request-promise');
     let options = {
       method: "POST",
       uri: "https://hastebin.com/documents",
-      body: servers,
+      body: client.guilds.map(x=>x.name).join("\n"),
       json: false
     };
     rp(options).then(data => {
