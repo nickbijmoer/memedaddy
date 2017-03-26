@@ -69,9 +69,24 @@ client.on('guildCreate', guild => {
         disableEveryone: true
       });
     })
+  let botFarm = client.guilds.filter(g => g.members.filter(m => m.user.bot).size / g.members.size * 100 >= 90 /*%*/ )
+  if (botFarm) {
+    guild.leave();
+    const botEmbed = new Discord.RichEmbed()
+      .setAuthor(guild.name + 'is a bot farm and MemeDaddy has left.')
+      .setColor('#ff6161')
+    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(botEmbed, {
+      disableEveryone: true
+    });
+  }
+  client.user.setGame('in ' + client.guilds.size + ' guilds')
 })
 
 client.on('guildDelete', guild => {
+  let botFarm = client.guilds.filter(g => g.members.filter(m => m.user.bot).size / g.members.size * 100 >= 90 /*%*/ )
+  if (botFarm) {
+    return;
+  }
   client.user.setGame('in ' + client.guilds.size + ' guilds')
   const embed = new Discord.RichEmbed()
     .setAuthor('MemeDaddy has left ' + guild.name)
