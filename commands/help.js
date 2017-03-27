@@ -23,7 +23,6 @@ exports.run = function (client, msg) {
         "pun - gotta love puns, right?\n" +
         "pupper - bark bark!\n" +
         "rip <TYPE user's name> - I can't explain this one. Do NOT mention someone.\n" +
-        "say - make MemeDaddy say dumb stuff\n" +
         "shitpost - warning: shitpost\n" +
         "superscript <message> - translates your message to superscript\n" +
         "trigger <mention user> - will trigger someone" +
@@ -52,7 +51,6 @@ exports.run = function (client, msg) {
 
         "\nComing Soon\n" +
         "========\n" +
-        "ram - detailed report about RAM usage\n" +
         "a game?\n" +
         "meme generator - ez ez ez\n"
 

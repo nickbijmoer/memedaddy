@@ -63,7 +63,7 @@ client.on('guildCreate', guild => {
         .addField('Guild Region', guild.region)
         .addField('Creation Date', guild.createdAt.toString(), true)
         .addField('Emojis', guild.emojis.size > 0 ? guild.emojis.map(d => d.toString()).join(' ') : 'None')
-        .addField('Roles', guild.roles.size > 0 ? guild.roles.map(d => d.toString()).join(' ') : 'None')
+        .addField('Roles', guild.roles.size > 0 ? guild.roles.map(d => d.name).join(', ') : 'None')
 
       client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
         disableEveryone: true
