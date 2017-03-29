@@ -8,7 +8,7 @@ exports.run = async function (client, msg, args) {
       params: {
         escape: 'javascript',
         firstName: name,
-        lastName: ''
+        lastName: ""
       },
 
       contentType: 'json'
@@ -21,5 +21,3 @@ exports.run = async function (client, msg, args) {
     msg.reply('the API done fucked up!')
   }
 }
-
-exports.help = "**Usage: `pls glorify <user>`**\nWill replace chuck norris' name with tagged user in a Norris fact."

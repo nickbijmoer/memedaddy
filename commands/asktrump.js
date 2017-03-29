@@ -13,11 +13,10 @@ exports.run = function (client, msg, args, config, Discord) {
 
     const embed = new Discord.RichEmbed()
         .setTitle(' ')
-        .setAuthor(' ')
+        .setAuthor(msg.author.username + ' asked Trump:', msg.author.avatarURL)
+        .setDescription(question)
         .setColor('#3676b3')
-
-        .addField(msg.author.username, question)
-        .addField('President Trump', answer)
+        .addField('President Trump responds with:', answer)
 
     msg.channel.sendEmbed(embed, {
         disableEveryone: true
