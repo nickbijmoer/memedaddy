@@ -41,6 +41,17 @@ client.on('message', msg => {
       try {
         delete require.cache[require.resolve('./commands/' + command)]
         require('./commands/' + command).run(client, msg, args, config, Discord)
+        const embed = new Discord.RichEmbed()
+          .setAuthor(command)
+          .setColor('#7d5bbe')
+          .setDescription(msg.author.username + `#` + msg.author.discriminator + ` in ` + msg.guild)
+        try {
+          client.guilds.get('281482896265707520').channels.get('297254732647628800').sendEmbed(embed, {
+            disableEveryone: true
+          });
+        } catch (e) {
+          console.log(e)
+        }
       } catch (err) {
         console.error(err)
       }
@@ -50,26 +61,30 @@ client.on('message', msg => {
 
 client.on('guildCreate', guild => {
   client.user.setGame('in ' + client.guilds.size + ' guilds')
-  client.guilds.get(guild.id).fetchMembers()
-    .then(x => {
-      let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
-      const embed = new Discord.RichEmbed()
-        .setAuthor('MemeDaddy has joined ' + guild.name)
-        .setColor('#2D7FFF')
-        .setThumbnail(guild.iconURL)
-        .setDescription(`(${guild.id})`)
-        .addField('Guild Owner', guild.owner.user.username + '#' + guild.owner.user.discriminator + `\n(${guild.owner.user.id})`)
-        .addField('Bots/Members', `${c}/${guild.memberCount}`)
-        .addField('Guild Region', guild.region)
-        .addField('Creation Date', guild.createdAt.toString(), true)
-        .addField('Emojis', guild.emojis.size > 0 ? guild.emojis.map(d => d.toString()).join(' ') : 'None')
-        .addField('Roles', guild.roles.size > 0 ? guild.roles.map(d => d.name).join(', ') : 'None')
+  try {
+    client.guilds.get(guild.id).fetchMembers()
+      .then(x => {
+        let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
+        const embed = new Discord.RichEmbed()
+          .setAuthor('MemeDaddy has joined ' + guild.name)
+          .setColor('#2D7FFF')
+          .setThumbnail(guild.iconURL)
+          .setDescription(`(${guild.id})`)
+          .addField('Guild Owner', guild.owner.user.username + '#' + guild.owner.user.discriminator + `\n(${guild.owner.user.id})`)
+          .addField('Bots/Members', `${c}/${guild.memberCount}`)
+          .addField('Guild Region', guild.region)
+          .addField('Creation Date', guild.createdAt.toString(), true)
+          .addField('Emojis', guild.emojis.size > 0 ? guild.emojis.map(d => d.toString()).join(' ') : 'None')
+          .addField('Roles', guild.roles.size > 0 ? guild.roles.map(d => d.name).join(', ') : 'None')
 
-      client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
-        disableEveryone: true
-      });
-    })
-  let botFarm = client.guilds.filter(g => g.members.filter(m => m.user.bot).size / g.members.size * 100 >= 90 /*%*/ )
+        client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
+          disableEveryone: true
+        });
+      })
+  } catch (e) {
+    console.log(e)
+    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`There was an error with adding the last guild join message. ${guild.name}`)
+  }
 
   client.user.setGame('in ' + client.guilds.size + ' guilds')
 })
@@ -77,12 +92,18 @@ client.on('guildCreate', guild => {
 client.on('guildDelete', guild => {
 
   client.user.setGame('in ' + client.guilds.size + ' guilds')
-  const embed = new Discord.RichEmbed()
-    .setAuthor('MemeDaddy has left ' + guild.name)
-    .setColor('#ff6161')
-  client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
-    disableEveryone: true
-  })
+  try {
+    const embed = new Discord.RichEmbed()
+      .setAuthor('MemeDaddy has left ' + guild.name)
+      .setColor('#ff6161')
+    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendEmbed(embed, {
+      disableEveryone: true
+    })
+  } catch (e) {
+    console.log(e)
+    client.guilds.get('281482896265707520').channels.get('287398833468604416').sendMessage(`There was an error with adding the last guild leave message. ${guild.name}`)
+  }
+  client.user.setGame('in ' + client.guilds.size + ' guilds')
 })
 
 

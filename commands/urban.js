@@ -20,7 +20,6 @@ exports.run = function (client, msg, args, config, Discord) {
     } else {
         search = ('asshole')
         urban.random().first(function (json) {
-            console.log(json)
             const embed = new Discord.RichEmbed()
                 .setDescription('Author: ' + json.author)
                 .setAuthor('Urban Dictionary: ' + json.word)
