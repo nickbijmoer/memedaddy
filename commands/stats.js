@@ -32,13 +32,13 @@
 
           const embed = new Discord.RichEmbed()
             .setColor('#7d5bbe')
-            .setTitle(`MemeDaddy's Stats`)
+            .setTitle( client.user.username + ` Stats`)
             .setDescription('He\'s been awake for' + timeCon(process.uptime()))
             .addField('🏠 Guilds', client.guilds.size, true)
             .addField('📄 Text Channels', client.channels.size, true)
             .addField('🤵 Users', client.users.size, true)
             .addField('💾 Last Commit', jsonBody[0].commit.message, true)
-            .addField('💻 RAM Usage', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
+            .addField('🐏 RAM Usage', `${((process.memoryUsage().heapUsed / 1024) / 1024).toFixed(2)} MB`, true)
             .addField('🏓 Ping', `${(client.ping).toFixed(0)} ms`, true)
 
           msg.channel.sendEmbed(embed, {

@@ -6,6 +6,7 @@ const client = new Discord.Client()
 
 client.login(config.token)
 
+
 const commandsPath = path.join(__dirname, './commands')
 
 client.on('message', msg => {
@@ -72,26 +73,19 @@ client.on('guildCreate', guild => {
         client.guilds.get('281482896265707520').channels.get('297554251452776458').sendMessage(`✅ Guild: \`${guild.name}\`\nTotal: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percent: **${percentage}** `)
       }
     })
-  client.user.setGame('in ' + client.guilds.size + ' guilds')
+
 })
 
 client.on('guildDelete', guild => {
 
   client.guilds.get('281482896265707520').channels.get('297554251452776458').sendMessage(`❌ Guild: \`${guild.name}\``)
 
-  client.user.setGame('in ' + client.guilds.size + ' guilds')
 })
 
 
 client.on('ready', () => {
-  console.log('MemeDaddy ' + config.version + ' loaded successfully. 👌')
-  client.user.setGame('in ' + client.guilds.size + ' guilds')
-  const embed = new Discord.RichEmbed()
-    .setAuthor('MemeDaddy has been rebooted.')
-    .setColor('#00d322')
-  client.guilds.get('281482896265707520').channels.get('297254732647628800').sendEmbed(embed, {
-    disableEveryone: true
-  });
+  console.log(client.user.username + config.version + ' loaded successfully. 👌')
+  client.user.setGame('pls help', 'https://www.twitch.tv/melmsiebot')
 })
 
 process.on('unhandledRejection', err => {

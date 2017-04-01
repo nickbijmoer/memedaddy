@@ -21,5 +21,3 @@ exports.run = function (client, msg, args, config) {
     }
   }
 }
-
-exports.help = '**Usage: `pls bug <message to send>`**\nUse this command to submit a bug report to Melmsie.'
