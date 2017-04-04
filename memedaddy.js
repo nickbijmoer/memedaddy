@@ -84,8 +84,8 @@ client.on('guildDelete', guild => {
 
 
 client.on('ready', () => {
-  console.log(client.user.username + config.version + ' loaded successfully. 👌')
-  client.user.setGame('pls help', 'https://www.twitch.tv/melmsiebot')
+  console.log(client.user.username + ' loaded successfully. 👌')
+  client.user.setGame('pls help | ' + config.version, 'https://www.twitch.tv/melmsiebot')
 })
 
 process.on('unhandledRejection', err => {
