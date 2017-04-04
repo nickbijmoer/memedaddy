@@ -10,8 +10,13 @@ exports.run = function (client, msg, args) {
                 
                 avatar.invert()
                 avatar.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
+                    try {
                     mesg.delete()
                     msg.channel.sendFile(buffer)
+                    } catch (e) {
+                        console.log(e)
+                        msg,reply('there was an error with this command.')
+                    }
                 })
 
             })

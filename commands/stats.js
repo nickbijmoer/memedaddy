@@ -32,8 +32,8 @@
 
           const embed = new Discord.RichEmbed()
             .setColor('#7d5bbe')
-            .setTitle( client.user.username + ` Stats`)
-            .setDescription('He\'s been awake for' + timeCon(process.uptime()))
+            .setTitle( client.user.username + " " + config.version + ` Stats`)
+            .setDescription(client.user.username + ' has been awake for ' + timeCon(process.uptime()))
             .addField('🏠 Guilds', client.guilds.size, true)
             .addField('📄 Text Channels', client.channels.size, true)
             .addField('🤵 Users', client.users.size, true)
