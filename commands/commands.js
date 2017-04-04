@@ -9,7 +9,7 @@
            .addField('🖼 Image Manipulation', 'trigger, invert')
            .addField('🎤 Voice Commands', 'airhorn')
            .addField('ℹ Utilities and Information', 'bug, commands, help, info, ping, serverinfo, stats, support, uptime, userinfo')
-           .addField('<:memesie:298886809524502529> Melmsie Only', 'eval, reboot, servers')
+           .addField('<:memesie:298886809524502529> Melmsie Only', 'eval, kys, servers')
            .addField('Coming <:soon:233642257817927680>', 'memegen, magik, swirl, soundclown')
            .setFooter("Current commands as of ")
            .setTimestamp(new Date(msg.createdTimestamp))
