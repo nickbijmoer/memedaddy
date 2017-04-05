@@ -61,7 +61,7 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
-
+guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Dank Memer.\n\nTo see info about getting started, do \`pls help\`.\n\nMy owner's name is Melmsie#8769, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
   client.guilds.get(guild.id).fetchMembers()
     .then(x => {
       let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
