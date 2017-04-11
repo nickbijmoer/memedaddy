@@ -10,11 +10,13 @@ client.login(config.token)
 const commandsPath = path.join(__dirname, './commands')
 
 client.on('message', msg => {
-  if (msg.author.bot || !msg.content.startsWith(config.prefix)) {
+  if (msg.author.bot || !msg.content.startsWith(config.prefix + ' ')) {
     return
   }
-  const command = msg.content.substring(config.prefix.length).toLowerCase().split(' ')[0]
+  const command = msg.content.substring(config.prefix.length + 1).toLowerCase().split(" ")[0]
+  console.log(command)
   const args = msg.content.split(' ').slice(2)
+  console.log(args)
   if (command === 'eval') {
     const {
       username,
@@ -85,7 +87,7 @@ client.on('guildDelete', guild => {
 
 client.on('ready', () => {
   console.log(client.user.username + ' loaded successfully. 👌')
-  client.user.setGame('pls help | ' + config.version, 'https://www.twitch.tv/melmsiebot')
+  client.user.setGame(`${config.prefix} help | ${config.version} https://www.twitch.tv/melmsiebot`)
 })
 
 process.on('unhandledRejection', err => {

@@ -25,6 +25,8 @@
     "plotly": "^1.0.6",
     "puns": "^2.0.0",
     "react-trump": "^0.2.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
     "trumpify": "^0.2.0",
     "urban": "^0.3.1",
     "ytdl-core": "^0.11.0",

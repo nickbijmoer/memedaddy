@@ -1,11 +1,13 @@
+const config = require('../config.json')
+const prefix = config.prefix
 exports.run = function (client, msg, args, config, Discord) {
 
     const embed = new Discord.RichEmbed()
         .setColor('#7d5bbe')
         .setTitle(client.user.username)
-        .setDescription('Prefix is `pls`.')
-        .addField('Example:', 'pls shitpost')
-        .addField('Commands', 'do `pls commands` to see a full list of commands.')
+        .setDescription(`Prefix is \`${prefix}\`.`)
+        .addField('Example:', `${prefix} shitpost`)
+        .addField('Commands', `do \`${prefix} commands\` to see a full list of commands.`)
         .addField('Github', `The repo for this bot can be found [here](https://github.com/melmsie/memedaddy).`)
         .addField('Support Server', `Come to [this server](https://discord.gg/3GNMJBG) to get help or just hang out.`)
 

@@ -1,7 +1,7 @@
 exports.run = function (client, msg, args, config, Discord) {
   if (msg.author.id === config.owner) {
    
-    var request = require('request')
+    //var request = require('request')
     const rp = require('request-promise');
     let options = {
       method: "POST",
