@@ -6,6 +6,7 @@ const client = new Discord.Client()
 
 client.login(config.token)
 
+let commandsUsed = 0
 
 const commandsPath = path.join(__dirname, './commands')
 
@@ -36,6 +37,8 @@ client.on('message', msg => {
       msg.reply('you don\'t have permission to use this command.')
       owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
     }
+  } else if (command === 'usage'){
+    msg.reply(commandsUsed)
   } else {
     fs.access(path.join(commandsPath, command + '.js'), fs.constants.R_OK, (err) => {
       if (err) {
@@ -49,6 +52,7 @@ client.on('message', msg => {
           .setColor('#7d5bbe')
           .setDescription(msg.author.username + `#` + msg.author.discriminator + ` in ` + msg.guild)
         try {
+          commandsUsed++
           client.guilds.get('281482896265707520').channels.get('297254732647628800').sendEmbed(embed, {
             disableEveryone: true
           });
@@ -69,7 +73,7 @@ guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Dank Memer
       let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
       let d = guild.memberCount - c
       let percentage = Math.round((c / guild.memberCount) * 100)
-      if (percentage > 75) {
+      if (percentage > 70 && c > 10) {
         client.guilds.get('281482896265707520').channels.get('297554251452776458').sendMessage(`🤖 Guild: \`${guild.name}\`\nTotal: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percent: **${percentage}** `)
       } else {
         client.guilds.get('281482896265707520').channels.get('297554251452776458').sendMessage(`✅ Guild: \`${guild.name}\`\nTotal: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percent: **${percentage}** `)
