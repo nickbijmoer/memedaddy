@@ -1,5 +1,3 @@
-const config = require('../config.json')
-const prefix = config.prefix
 exports.run = function (client, msg, args, config, Discord) {
 
     const embed = new Discord.RichEmbed()
