@@ -170,4 +170,13 @@ client.on('ready', () => {
 
 process.on('unhandledRejection', err => {
   console.error('Uncaught Promise Error: \n' + err.stack)
+  const embed = new Discord.RichEmbed()
+    .setAuthor(`Error in ${guild.name}`)
+    .setColor('#ff0000')
+    .setDescription(err.stack)
+    .setFooter(`Guild ID: ${guild.id}`)
+
+  client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
+    disableEveryone: true
+  })
 })
