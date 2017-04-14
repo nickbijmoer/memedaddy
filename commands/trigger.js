@@ -1,54 +1,70 @@
-const Jimp = require('jimp')
-const path = require('path')
-
-const assetsPath = path.join(__dirname, '../assets/')
-
 exports.run = async function (client, msg, args) {
-  if (msg.mentions.users.size !== 1) {
-    return msg.reply('you must mention **one** user!')
-  }
+  const Jimp = require('jimp')
+  const path = require('path')
+  const GIFEncoder = require('gifencoder')
 
-  const firstMention = msg.mentions.users.first()
+  let frameCount = 8;
+  let frames = [];
 
-  const notice = await msg.channel.sendMessage(':gear: Generating... please wait.')
-  const fail = () => notice.edit(':warning: Failed to generate image')
+  let avatarurl = msg.mentions.users.size > 0 ? msg.mentions.users.first().displayAvatarURL.replace("gif", "png") : msg.author.displayAvatarURL.replace("gif", "png");
 
-  let avatar, triggered, red
+  let avatar = await Jimp.read(avatarurl);
 
-  try {
-    [ avatar, triggered, red ] = await Promise.all([
-      Jimp.read(firstMention.displayAvatarURL),
-      Jimp.read(path.join(assetsPath, 'triggered.jpg')),
-      Jimp.read(path.join(assetsPath, 'red.png'))
-    ])
-  } catch (err) {
-    console.error(err)
+  avatar.resize(320, 320);
 
-    return fail()
-  }
+  let triggered = await Jimp.read(path.join(__dirname, '..', 'assets/triggered.jpg'));
+  triggered.resize(280, 60);
+  let overlay = await Jimp.read(path.join(__dirname, '..', 'assets/red.png'));
+  overlay.opacity(0.2);
 
-  red.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
-  triggered.scaleToFit(avatar.bitmap.width, avatar.bitmap.height)
+  let buffers = [];
+  let encoder = new GIFEncoder(256, 256);
+  let stream = encoder.createReadStream();
 
-  red.opacity(0.2)
+  stream.on('data', function (buffer) {
+    buffers.push(buffer);
+  });
+  stream.on('end', function () {
+    let buffer = Buffer.concat(buffers);
+    msg.delete();
+    msg.channel.sendFile(buffer, "test.gif")
+  });
 
-  avatar.composite(red, 0, 0)
-        .composite(triggered, 0, avatar.bitmap.height - triggered.bitmap.height)
+  let base = new Jimp(256, 256);
 
-  avatar.getBuffer(Jimp.MIME_PNG, async (err, image) => {
-    if (err) {
-      console.error(new Error(err))
-
-      return fail()
+  let temp, x, y;
+  for (let i = 0; i < frameCount; i++) {
+    temp = base.clone();
+    if (i == 0) {
+      x = -16;
+      y = -16;
+    } else {
+      x = -32 + (getRandomInt(-16, 16));
+      y = -32 + (getRandomInt(-16, 16));
     }
-
-    notice.delete()
-
-    msg.channel.sendFile(
-      image,
-      't r i g g e r.png',
-      `**${firstMention.username} is triggered**`
-    )
-  })
+    temp.composite(avatar, x, y);
+    if (i == 0) {
+      x = -10;
+      y = 200;
+    } else {
+      x = -12 + (getRandomInt(-8, 8));
+      y = 200 + (getRandomInt(-0, 12));
+    }
+    temp.composite(triggered, x, y);
+    temp.composite(overlay, 0, 0)
+    frames.push(temp.bitmap.data);
+  }
+  encoder.start();
+  encoder.setRepeat(0);
+  encoder.setDelay(20);
+  for (let frame of frames) encoder.addFrame(frame);
+  encoder.finish();
 }
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
+
+exports.help = "Returns a ｔｒｉｇｇｅｒｅｄ-meme of a users avatar. \nUsage: __prefixxtrigg `<@mention>`__\nDefaults to client if no user mentioned. "

@@ -2,6 +2,7 @@ const config = require('./config.json')
 const Discord = require('discord.js')
 const fs = require('fs')
 const path = require('path')
+let prefixdb = require("./prefixdb.json")
 const client = new Discord.Client()
 
 client.login(config.token)
@@ -13,14 +14,13 @@ let guildsLeft = 0
 const commandsPath = path.join(__dirname, './commands')
 
 client.on('message', msg => {
-  let prefix = msg.content.split(" ")[0]
-  if(!config.prefix.includes(prefix))
-    return
-  if (msg.author.bot || !msg.content.startsWith(prefix + ' ')) {
+
+  if (!prefixdb[msg.guild.id]) prefixdb[msg.guild.id] = config.prefix
+  if (msg.author.bot || !msg.content.startsWith(prefixdb[msg.guild.id] + ' ')) {
     return
   }
 
-  const command = msg.content.substring(prefix.length + 1).toLowerCase().split(" ")[0]
+  const command = msg.content.substring(prefixdb[msg.guild.id].length + 1).toLowerCase().split(" ")[0]
   const args = msg.content.split(' ').slice(2)
 
   if (command === 'eval') {
@@ -86,7 +86,7 @@ client.on('message', msg => {
       }
       try {
         delete require.cache[require.resolve('./commands/' + command)]
-        require('./commands/' + command).run(client, msg, args, config, Discord)
+        require('./commands/' + command).run(client, msg, args, config, Discord, prefixdb)
         const embed = new Discord.RichEmbed()
           .setAuthor(command)
           .setColor('#7d5bbe')
@@ -107,6 +107,12 @@ client.on('message', msg => {
 })
 
 client.on('guildCreate', guild => {
+  prefixdb[guild.id] = config.prefix;
+
+  fs.writeFile("./prefixdb.json", JSON.stringify(prefixdb, "", "\t"), (err) => {
+    if (err) return console.log(Date() + " createGuildHandler error: " + err)
+    console.log(Date() + "Prefix DB updated.")
+  })
   guildsJoined++
   client.guilds.get(guild.id).fetchMembers()
     .then(x => {
@@ -143,7 +149,17 @@ client.on('guildCreate', guild => {
         } catch (e) {
           console.log(e)
         }
-        guild.defaultChannel.send(`Hello \`${guild.name}\`! My name is Dank Memer.\n\nTo see info about getting started, do \`pls help\`.\n\nMy owner's name is Melmsie#8769, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
+        const welcome = new Discord.RichEmbed()
+          .setColor('#ffffff')
+          .setDescription(`Hello \`${guild.name}\`! My name is Dank Memer.\n\nTo see info about getting started, do \`pls help\`.\n\nMy owner's name is Melmsie#8769, and he adds new commands fairly often!\n\nIf you don't like my prefix, do \`pls prefix <whatever you want>\`\n\nHave a **dank** day!`)
+        try {
+          guild.defaultChannel.sendEmbed(welcome, {
+            disableEveryone: true
+          })
+        } catch (e) {
+          console.log(e)
+        }
+
 
       }
     })
@@ -151,6 +167,13 @@ client.on('guildCreate', guild => {
 })
 
 client.on('guildDelete', guild => {
+  if (prefixdb[guild.id]) {
+    delete prefixdb[guild.id];
+    fs.writeFile("./prefixdb.json", JSON.stringify(prefixdb, "", "\t"), (err) => {
+      if (err) return console.log(Date() + " createGuildHandler error: " + err)
+      console.log(Date() + "Prefix DB updated.")
+    })
+  }
   guildsLeft++
   const embed = new Discord.RichEmbed()
     .setAuthor(`Left ${guild.name}`)
@@ -166,10 +189,20 @@ client.on('guildDelete', guild => {
 })
 
 client.on('ready', () => {
-  console.log(client.user.username + ' loaded successfully. 👌')
-  client.user.setGame(`${config.prefix[0]} help | ${config.version}`, `https://www.twitch.tv/melmsiebot`)
+  console.log(Date() + client.user.username + ' loaded successfully. 👌')
+  let arr = ["with dank memes", "with myself", "with Melmsie", `with ${client.users.size} people`, `on ${client.guilds.size} servers`]
+
+  setInterval(() => {
+
+    let shit = arr[0]
+    arr.splice(arr.indexOf(arr[0]), 1)
+
+    arr.push(shit)
+    client.user.setGame(arr[0])
+  }, 18000)
+ 
 })
 
 process.on('unhandledRejection', err => {
-  console.error('Uncaught Promise Error: \n' + err.stack)
+  console.error(Date() + ' Uncaught Promise Error: \n' + err.stack)
 })
