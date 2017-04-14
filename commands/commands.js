@@ -3,7 +3,7 @@
            .setColor('#ff0000')
            .setAuthor(`Commands`)
            .setDescription('Be sure to use `pls <command>`')
-           .addField('<:megusta:293231471173304320> Memey Commands', '9gag, asktrump, glorify, insultme, joke, kitty, knock, lmgtfy, mama, meirl, norris, pun, pupper, rip, say, shitpost, urban, xkcd')
+           .addField('<:megusta:293231471173304320> Memey Commands', 'asktrump, joke, kitty, knock, mama, meirl, norris, pun, pupper, rip, say, shitpost, xkcd')
            .addField('<:LUL:298887728161095681> Tags & ᵗᵉˣᵗ ｍａｎｉｐｕｌａｔｉｏｎ', 'feelsbadman, flip, leet, lenny, lul, superscript, vaporwave, zalgo')
            .addField('🔨 Moderation Tools', 'ban, kick, purge')
            .addField('🖼 Image Manipulation', 'trigger, invert')

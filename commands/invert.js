@@ -18,10 +18,7 @@ exports.run = function (client, msg, args) {
                         msg,reply('there was an error with this command.')
                     }
                 })
-
             })
         })
-
-    }
-
+    } //else statement
 }

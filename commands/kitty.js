@@ -16,4 +16,3 @@ exports.run = async function (client, msg) {
     }
   }, 2500)
 }
-exports.help = '**Usage: `pls kitty`**\nAll da kitteh pics'

@@ -19,7 +19,7 @@ exports.run = function (client, msg, args, config, Discord) {
 
         msg.channel.sendEmbed(userInfo, {
             disableEveryone: true
-        });
+        })
     } else {
         msg.reply(' memedaddy only currently supports looking up your own info. This should be fixed by next week.')
     }

@@ -1,7 +1,5 @@
 exports.run = function (client, msg, args, config) {
-  if (msg.author.id === '180093157554388993') {
-    return msg.reply('you have been banned from using this feature.')
-  } else {
+  
     try {
       if (args.length === 0) {
         msg.reply('you need to include a message to send!')
@@ -19,5 +17,4 @@ exports.run = function (client, msg, args, config) {
     } catch (err) {
       console.error(err)
     }
-  }
 }

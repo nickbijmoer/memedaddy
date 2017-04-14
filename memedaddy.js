@@ -29,18 +29,17 @@ client.on('message', msg => {
       discriminator,
       id
     } = msg.author
-    const owner = client.users.get(config.owner)
     const script = args.join(' ')
     if (msg.author.id === config.owner) {
       try {
         const dank = eval(script) // eslint-disable-line no-eval
         msg.channel.sendCode('js', dank)
       } catch (e) {
-        msg.channel.sendMessage(':warning: **ERROR** :warning: ```\n' + e + '\n```')
+        msg.channel.send(':warning: **ERROR** :warning: ```\n' + e + '\n```')
       }
     } else {
       msg.reply('you don\'t have permission to use this command.')
-      owner.sendMessage(`**${username}#${discriminator} (${id}):**\nThis person was trying to use the eval command!\n${script}`)
+
     }
   } else if (command === 'report' && msg.author.id === config.owner) {
     function timeCon(time) {
@@ -119,7 +118,7 @@ client.on('guildCreate', guild => {
           .setAuthor('🤖 Joined Bot Guild 🤖')
           .setColor('#00ff00')
           .setFooter(`Guild ID: ${guild.id}`)
-          .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner}\nTotal Members: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
+          .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner.displayName}\nMembers: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
         try {
           client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
             disableEveryone: true
@@ -127,7 +126,7 @@ client.on('guildCreate', guild => {
         } catch (e) {
           console.log(e)
         }
-        guild.defaultChannel.sendMessage(`Thanks for trying to add ${client.user.username}, but our anti-bot guild protection system has flagged this server.\n\nIf you'd like to appeal that, either make sure you have more humans than bots, or less than 10 bots. At that time you can try to add me again. Goodbye!`)
+        guild.defaultChannel.send(`Thanks for trying to add ${client.user.username}, but our anti-bot guild protection system has flagged this server.\n\nIf you'd like to appeal that, either make sure you have more humans than bots, or less than 10 bots. At that time you can try to add me again. Goodbye!`)
           .then(() => {
             guild.leave()
           })
@@ -136,7 +135,7 @@ client.on('guildCreate', guild => {
           .setAuthor('Joined Guild')
           .setColor('#00ff00')
           .setFooter(`Guild ID: ${guild.id}`)
-          .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner}\nTotal Members: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
+          .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner.displayName}\nMembers: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
         try {
           client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
             disableEveryone: true
@@ -144,7 +143,7 @@ client.on('guildCreate', guild => {
         } catch (e) {
           console.log(e)
         }
-        guild.defaultChannel.sendMessage(`Hello \`${guild.name}\`! My name is Dank Memer.\n\nTo see info about getting started, do \`pls help\`.\n\nMy owner's name is Melmsie#8769, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
+        guild.defaultChannel.send(`Hello \`${guild.name}\`! My name is Dank Memer.\n\nTo see info about getting started, do \`pls help\`.\n\nMy owner's name is Melmsie#8769, and he adds new commands fairly often!\n\nIf you find a bug, or want to suggest a new command, do \`pls bug <message>\`\n\nHave a **dank** day!`)
 
       }
     })
@@ -173,13 +172,4 @@ client.on('ready', () => {
 
 process.on('unhandledRejection', err => {
   console.error('Uncaught Promise Error: \n' + err.stack)
-  const embed = new Discord.RichEmbed()
-    .setAuthor(`Error in ${client.guild.name}`)
-    .setColor('#ff0000')
-    .setDescription(err.stack)
-    .setFooter(`Guild ID: ${client.guild.id}`)
-
-  client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
-    disableEveryone: true
-  })
 })

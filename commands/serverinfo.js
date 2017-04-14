@@ -2,7 +2,7 @@ exports.run = function (client, msg, args, config, Discord) {
 
     client.guilds.get(msg.guild.id).fetchMembers()
         .then(x => {
-            let c = (x.members.filter(guildMember => guildMember.user.bot).array().length);
+            let c = (x.members.filter(guildMember => guildMember.user.bot).array().length)
             let d = msg.guild.memberCount - c
             const embed = new Discord.RichEmbed()
                 .setAuthor('Server info for ' + msg.guild.name)
@@ -19,7 +19,7 @@ exports.run = function (client, msg, args, config, Discord) {
             try {
                 msg.channel.sendEmbed(embed, {
                     disableEveryone: true
-                });
+                })
             } catch (e) {
                 console.log(e)
                 msg.reply('there was an issue running this command.')

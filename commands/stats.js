@@ -4,13 +4,13 @@
         hours = 0,
         minutes = 0,
         seconds = 0
-      days = Math.floor(time / 86400000);
+      days = Math.floor(time / 86400000)
       time -= days * 86400000
-      hours = Math.floor(time / 3600000);
+      hours = Math.floor(time / 3600000)
       time -= hours * 3600000
-      minutes = Math.floor(time / 60000);
+      minutes = Math.floor(time / 60000)
       time -= minutes * 60000
-      seconds = Math.floor(time / 1000);
+      seconds = Math.floor(time / 1000)
       time -= seconds * 1000
       days = days > 9 ? days : "" + days
       hours = hours > 9 ? hours : "" + hours
@@ -20,7 +20,7 @@
     }
 
     exports.run = function (client, msg, args, config, Discord) {
-      let request = require('request');
+      let request = require('request')
       request({
         url: 'https://api.github.com/repos/Melmsie/Markos/commits',
         headers: {

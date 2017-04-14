@@ -14,4 +14,3 @@ exports.run = function (client, msg, args, config, Discord) {
 
   msg.channel.sendEmbed(embed, { disableEveryone: true })
 }
-
