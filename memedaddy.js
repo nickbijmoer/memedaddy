@@ -13,11 +13,14 @@ let guildsLeft = 0
 const commandsPath = path.join(__dirname, './commands')
 
 client.on('message', msg => {
-  if (msg.author.bot || !msg.content.startsWith(config.prefix + ' ')) {
+  let prefix = msg.content.split(" ")[0]
+  if(!config.prefix.includes(prefix))
+    return
+  if (msg.author.bot || !msg.content.startsWith(prefix + ' ')) {
     return
   }
 
-  const command = msg.content.substring(config.prefix.length + 1).toLowerCase().split(" ")[0]
+  const command = msg.content.substring(prefix.length + 1).toLowerCase().split(" ")[0]
   const args = msg.content.split(' ').slice(2)
 
   if (command === 'eval') {
@@ -165,7 +168,7 @@ client.on('guildDelete', guild => {
 
 client.on('ready', () => {
   console.log(client.user.username + ' loaded successfully. 👌')
-  client.user.setGame(`${config.prefix} help | ${config.version}`, `https://www.twitch.tv/melmsiebot`)
+  client.user.setGame(`${config.prefix[0]} help | ${config.version}`, `https://www.twitch.tv/melmsiebot`)
 })
 
 process.on('unhandledRejection', err => {
