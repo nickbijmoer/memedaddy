@@ -5,7 +5,7 @@ if (msg.content.toLowerCase().substring(prefixdb[msg.guild.id].length + 8, msg.c
             .setColor('#ffffff')
             .setDescription(`The current prefix for this guild is \`${prefixdb[msg.guild.id]}\`.`))
 
-        if (msg.guild.member(client.user).hasPermission('MANAGE_SERVER') || msg.author.id === config.owner) {
+        if (msg.guild.member(client.user).hasPermission('MANAGE_GUILD') || msg.author.id === config.owner) {
             if (msg.content.toLowerCase().substring(prefixdb[msg.guild.id].length + 8, msg.content.length).length > 16) return msg.channel.sendMessage("Please keep your prefix below 16 characters.")
             prefixdb[msg.guild.id] = msg.content.toLowerCase().substring(prefixdb[msg.guild.id].length + 8, msg.content.length)
             fs.writeFile("./prefixdb.json", JSON.stringify(prefixdb, "", "\t"), (err) => {
