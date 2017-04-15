@@ -10,10 +10,7 @@ if (msg.content.toLowerCase().substring(prefixdb[msg.guild.id].length + 8, msg.c
             prefixdb[msg.guild.id] = msg.content.toLowerCase().substring(prefixdb[msg.guild.id].length + 8, msg.content.length)
             fs.writeFile("./prefixdb.json", JSON.stringify(prefixdb, "", "\t"), (err) => {
                 if (err) return msg.channel.sendMessage("Your prefix couldn't be changed.\n" + err.message);
-                msg.channel.sendEmbed(new Discord.RichEmbed()
-                    .setColor('#ffffff')
-                    .setDescription(`Prefix successfully changed to \`${prefixdb[msg.guild.id]}\` for this guild.`)
-                )
+                msg.channel.send(`Prefix successfully changed to \`${prefixdb[msg.guild.id]}\` for this guild.`)
             })
         } else {
             return msg.channel.sendMessage("You do not have the required permissions for this command. You must have the manage server permission.")
