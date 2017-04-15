@@ -1,4 +1,4 @@
-exports.run = function (client, msg) {
+exports.run = function (client, msg, args, config, Discord) {
     const exec = require("child_process").exec;
     const args = msg.content.split(' ').slice(1).join(" ")
     msg.delete()
