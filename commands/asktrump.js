@@ -17,9 +17,11 @@ exports.run = function (client, msg, args, config, Discord) {
         .setDescription(question)
         .setColor('#3676b3')
         .addField('President Trump responds with:', answer)
-
+try {
     msg.channel.sendEmbed(embed, {
         disableEveryone: true
     })
-
+} catch (e) {
+    console.log(Date() + e)
+}
 }

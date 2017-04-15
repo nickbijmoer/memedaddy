@@ -5,6 +5,7 @@ exports.run = function (client, msg, args, settings, Discord) {
         return msg.reply(`Please be in a voice channel first!`);
     } else {
         msg.react('👌')
+        try {
         voiceChannel.join().then(connection => {
             // you can play a file or a stream here:
             const dispatcher = connection.playFile('./horn.mp3')
@@ -12,5 +13,8 @@ exports.run = function (client, msg, args, settings, Discord) {
                 voiceChannel.leave();
             });
         });
+        } catch (e){
+            console.log(Date() + e)
+        }
     }
 }
