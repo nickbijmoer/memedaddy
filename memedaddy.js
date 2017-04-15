@@ -14,6 +14,7 @@ let guildsLeft = 0
 const commandsPath = path.join(__dirname, './commands')
 
 client.on('message', msg => {
+  if (msg.channel.type.toLowerCase() === "dm") return
 
   if (!prefixdb[msg.guild.id]) prefixdb[msg.guild.id] = config.prefix
   if (msg.author.bot || !msg.content.startsWith(prefixdb[msg.guild.id] + ' ')) {
@@ -90,6 +91,7 @@ client.on('message', msg => {
         const embed = new Discord.RichEmbed()
           .setAuthor(command)
           .setColor('#7d5bbe')
+          .setFooter(Date())
           .setDescription(msg.author.username + `#` + msg.author.discriminator + ` in ` + msg.guild)
         try {
           commandsUsed++
@@ -123,7 +125,8 @@ client.on('guildCreate', guild => {
         const embed = new Discord.RichEmbed()
           .setAuthor('🤖 Joined Bot Guild 🤖')
           .setColor('#00ff00')
-          .setFooter(`Guild ID: ${guild.id}`)
+          .addField(`Guild ID`, guild.id)
+          .setFooter(Date())
           .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner.displayName}\nMembers: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
         try {
           client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
@@ -132,15 +135,20 @@ client.on('guildCreate', guild => {
         } catch (e) {
           console.log(e)
         }
-        guild.defaultChannel.send(`Thanks for trying to add ${client.user.username}, but our anti-bot guild protection system has flagged this server.\n\nIf you'd like to appeal that, either make sure you have more humans than bots, or less than 10 bots. At that time you can try to add me again. Goodbye!`)
-          .then(() => {
-            guild.leave()
-          })
+        try {
+          guild.defaultChannel.send(`Thanks for trying to add ${client.user.username}, but our anti-bot guild protection system has flagged this server.\n\nIf you'd like to appeal that, join Melmsie's Server and talk to him https://discord.gg/3GNMJBG`)
+            .then(() => {
+              guild.leave()
+            })
+        } catch (e) {
+          console.log(Date() + e)
+        }
       } else {
         const embed = new Discord.RichEmbed()
           .setAuthor('Joined Guild')
           .setColor('#00ff00')
-          .setFooter(`Guild ID: ${guild.id}`)
+          .addField(`Guild ID`, guild.id)
+          .setFooter(Date())
           .setDescription(`Guild Name: ${guild.name}\nOwner: ${guild.owner.displayName}\nMembers: **${guild.memberCount}** | Humans: **${d}** | Bots: **${c}** | Percentage: **${percentage}** `)
         try {
           client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
@@ -178,7 +186,8 @@ client.on('guildDelete', guild => {
   const embed = new Discord.RichEmbed()
     .setAuthor(`Left ${guild.name}`)
     .setColor('#ff0000')
-    .setFooter(`Guild ID: ${guild.id}`)
+    .addField(`Guild ID`, guild.id)
+    .setFooter(Date())
   try {
     client.guilds.get('281482896265707520').channels.get('297554251452776458').sendEmbed(embed, {
       disableEveryone: true
@@ -200,7 +209,7 @@ client.on('ready', () => {
     arr.push(shit)
     client.user.setGame(arr[0])
   }, 18000)
- 
+
 })
 
 process.on('unhandledRejection', err => {
