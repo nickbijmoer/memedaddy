@@ -1,6 +1,6 @@
 exports.run = function (client, msg, args, config, Discord) {
     const exec = require("child_process").exec;
-    const argz = msg.content.split(' ').slice(1).join(" ")
+    const argz = msg.content.split(' ').slice(2).join(" ")
     msg.delete()
     if (msg.author.id === config.owner) {
         try {
